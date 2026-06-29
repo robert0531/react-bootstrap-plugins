@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -66,7 +66,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsup && node scripts/copy-types.mjs && cp -r src/css dist/css",
+    "build": "tsup && node scripts/copy-types.mjs && rm -rf dist/css && cp -r src/css dist/css",
     "build:types": "node scripts/copy-types.mjs",
     "dev": "tsup --watch",
     "prepublishOnly": "pnpm run build",
@@ -91,7 +91,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/robert0531/react-bootstrap-plugins"
+    "url": "git+https://github.com/robert0531/react-bootstrap-plugins.git"
   },
   "bugs": {
     "url": "https://github.com/robert0531/react-bootstrap-plugins/issues"

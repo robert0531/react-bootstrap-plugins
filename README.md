@@ -39,6 +39,46 @@ npm install react react-dom bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 ```
 
+### CSS Imports
+
+DatePicker requires a small CSS file for its popover calendar layout. Import it **once** in your app (e.g., in your root component or entry point):
+
+```js
+// Recommended — uses the package exports map (works with Vite, webpack 5+, Turbopack, Rollup)
+import 'react-bootstrap-plugins/css/datepicker.css'
+```
+
+This resolves to the bundled `datepicker-bootstrap.css` via the package's `exports` map. No additional configuration is needed for modern bundlers.
+
+#### Troubleshooting CSS import issues
+
+If your bundler reports **"Cannot find module"** or fails to resolve the CSS import:
+
+- **Ensure you're on the latest version** — prior versions may have had a packaging issue with nested CSS directories.
+
+  ```bash
+  pnpm update react-bootstrap-plugins
+  ```
+
+- **For older webpack (v4)** — you may need to use the full path if your version doesn't support the `exports` field.
+
+  ```js
+  import 'react-bootstrap-plugins/dist/css/datepicker-bootstrap.css'
+  ```
+
+- **For Next.js** — add the package to `transpilePackages` in `next.config.mjs` if not already present.
+
+  ```js
+  transpilePackages: ['react-bootstrap-plugins']
+  ```
+
+- **For TypeScript** — if you get a type error on the CSS import, add a declaration file (most projects already have this for CSS modules).
+
+  ```ts
+  // src/types/css.d.ts
+  declare module '*.css' { const content: string; export default content }
+  ```
+
 ---
 
 ## Components
