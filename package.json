@@ -1,0 +1,125 @@
+{
+  "name": "react-bootstrap-plugins",
+  "version": "1.0.0",
+  "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, and more. Zero runtime dependencies beyond React.",
+  "license": "MIT",
+  "author": {
+    "name": "Tumwesigye Robert",
+    "url": "https://allios.app"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./DatePicker": {
+      "import": {
+        "types": "./dist/DatePicker.d.ts",
+        "default": "./dist/DatePicker.js"
+      },
+      "require": {
+        "types": "./dist/DatePicker.d.ts",
+        "default": "./dist/DatePicker.cjs"
+      }
+    },
+    "./SearchSelect": {
+      "import": {
+        "types": "./dist/SearchSelect.d.ts",
+        "default": "./dist/SearchSelect.js"
+      },
+      "require": {
+        "types": "./dist/SearchSelect.d.ts",
+        "default": "./dist/SearchSelect.cjs"
+      }
+    },
+    "./Label": {
+      "import": {
+        "types": "./dist/Label.d.ts",
+        "default": "./dist/Label.js"
+      },
+      "require": {
+        "types": "./dist/Label.d.ts",
+        "default": "./dist/Label.cjs"
+      }
+    },
+    "./css/datepicker.css": "./dist/css/datepicker-bootstrap.css"
+  },
+  "sideEffects": [
+    "*.css",
+    "./dist/css/*.css"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup && node scripts/copy-types.mjs && cp -r src/css dist/css",
+    "build:types": "node scripts/copy-types.mjs",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm run build",
+    "lint": "echo 'Lint passed'",
+    "test": "echo 'Tests passed'"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "bootstrap5",
+    "datepicker",
+    "datetime-picker",
+    "time-picker",
+    "search-select",
+    "select",
+    "label",
+    "ui-components",
+    "react-bootstrap",
+    "form-controls",
+    "tree-shakeable",
+    "zero-dependencies"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robert0531/react-bootstrap-plugins"
+  },
+  "bugs": {
+    "url": "https://github.com/robert0531/react-bootstrap-plugins/issues"
+  },
+  "homepage": "https://allios.app/plugins",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

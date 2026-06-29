@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Custom DatePicker — Bootstrap 5 design tokens
+   Zero dependencies.  Calendar grid + time picker + year picker + datetime combo.
+   Popover is portaled to document.body — positioning is set inline by JS.
+   ========================================================================== */
+
+/* --- Popover container --- */
+.datepicker-popover {
+  border-radius: var(--bs-border-radius, 0.375rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.datepicker-popover--wide {
+  min-width: 420px;
+}
+
+/* --- Calendar panel --- */
+.datepicker-calendar {
+  min-width: 260px;
+}
+
+/* 7-column day-of-week header + day grid */
+.datepicker-days-header,
+.datepicker-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+/* Day-of-week label */
+.datepicker-day-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color, #6c757d);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 2px 0;
+  width: 34px;
+}
+
+/* Individual day cell */
+.datepicker-day {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--bs-body-color, #212529);
+  background: transparent;
+  border: none;
+  border-radius: var(--bs-border-radius-sm, 0.25rem);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.datepicker-day:hover:not(:disabled):not(.datepicker-day--selected) {
+  background-color: var(--bs-primary-bg-subtle, #cfe2ff);
+}
+
+/* Today */
+.datepicker-day--today {
+  font-weight: 700;
+  border: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+/* Selected (Bootstrap primary) */
+.datepicker-day--selected {
+  background-color: var(--bs-primary, #0d6efd) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Outside current month */
+.datepicker-day--outside {
+  color: var(--bs-tertiary-color, #adb5bd);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Disabled (outside min/max range) */
+.datepicker-day--disabled {
+  color: var(--bs-tertiary-color, #adb5bd);
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- Year picker --- */
+.datepicker-year-picker {
+  min-width: 260px;
+}
+
+/* 4-column year grid */
+.datepicker-year-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.datepicker-year-cell {
+  font-size: 0.85rem;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+/* --- Time panel --- */
+.datepicker-time {
+  min-width: 120px;
+}
+
+/* Three-column scrollable time picker */
+.datepicker-time-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 52px;
+}
+
+.datepicker-time-col-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color, #6c757d);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.datepicker-time-col-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  overflow-y: scroll;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+  height: 220px;
+  scroll-behavior: smooth;
+}
+
+.datepicker-time-col-scroll::-webkit-scrollbar {
+  display: none;                  /* Chrome/Safari/Opera */
+}
+
+.datepicker-time-item {
+  width: 44px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--bs-body-color, #212529);
+  background: transparent;
+  border: none;
+  border-radius: var(--bs-border-radius-sm, 0.25rem);
+  cursor: pointer;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.datepicker-time-item:hover {
+  background-color: var(--bs-primary-bg-subtle, #cfe2ff);
+}
+
+.datepicker-time-item.active {
+  background-color: var(--bs-primary, #0d6efd);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* AM/PM items — slightly taller since only 2 */
+.datepicker-time-item--ampm {
+  height: 36px;
+  width: 46px;
+  font-size: 0.78rem;
+}
+
+.datepicker-time-separator {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--bs-body-color, #212529);
+  align-self: center;
+  margin-top: 14px;
+  flex: 0 0 auto;
+}
+
+/* Footer bar (Today/Now + Clear) */
+.datepicker-footer {
+  border-bottom-left-radius: var(--bs-border-radius, 0.375rem);
+  border-bottom-right-radius: var(--bs-border-radius, 0.375rem);
+}
+
+/* --- Dark mode --- */
+[data-bs-theme="dark"] .datepicker-popover {
+  background-color: var(--bs-body-bg, #212529);
+  border-color: var(--bs-border-color, #495057);
+}
+
+[data-bs-theme="dark"] .datepicker-day:hover:not(:disabled):not(.datepicker-day--selected) {
+  background-color: var(--bs-primary-bg-subtle, #2c3e50);
+}
+
+[data-bs-theme="dark"] .datepicker-time-item:hover {
+  background-color: var(--bs-primary-bg-subtle, #2c3e50);
+}
+
+[data-bs-theme="dark"] .datepicker-time-item.active {
+  background-color: var(--bs-primary, #0d6efd);
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .datepicker-footer {
+  border-top-color: var(--bs-border-color, #495057);
+}
+
+/* ==========================================================================
+   Mobile responsive — adapts layout and sizing for small screens
+   ========================================================================== */
+
+@media (max-width: 575.98px) {
+  /* Popover: never wider than the viewport */
+  .datepicker-popover {
+    max-width: calc(100vw - 8px) !important;
+    overflow-x: hidden;
+  }
+
+  /* Stack calendar + time vertically in datetime mode */
+  .datepicker-popover--wide .d-flex.flex-row {
+    flex-direction: column !important;
+  }
+
+  /* Hide vertical divider between calendar and time */
+  .datepicker-popover--wide .vr {
+    display: none;
+  }
+
+  /* Slightly smaller day cells to fit narrow screens */
+  .datepicker-day {
+    width: 28px;
+    height: 28px;
+    font-size: 0.72rem;
+  }
+
+  .datepicker-day-label {
+    width: 28px;
+    font-size: 0.62rem;
+  }
+
+  /* Reduce calendar min-width */
+  .datepicker-calendar,
+  .datepicker-year-picker {
+    min-width: 210px;
+  }
+
+  /* Time columns — stack more compactly */
+  .datepicker-time-col-scroll {
+    height: 200px;
+  }
+
+  .datepicker-time-item {
+    width: 38px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+
+  .datepicker-time-item--ampm {
+    width: 40px;
+    height: 32px;
+  }
+
+  .datepicker-time-separator {
+    font-size: 1rem;
+    margin-top: 12px;
+  }
+
+  /* Increase touch target for footer buttons */
+  .datepicker-footer .btn {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+    min-height: 34px;
+  }
+
+  /* Year grid cells — slightly roomier for tap */
+  .datepicker-year-cell {
+    font-size: 0.8rem;
+    padding: 8px 4px;
+    min-height: 34px;
+  }
+}

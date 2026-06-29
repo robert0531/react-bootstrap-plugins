@@ -1,0 +1,38 @@
+# Source control
+.git/
+.gitignore
+.github/
+
+# Dev config
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+tsconfig.json
+tsup.config.ts
+
+# Source (we ship dist/ and src/ for sourcemaps + declarations)
+# src/ is intentionally included for sourcemap resolution
+
+# Tests
+__tests__/
+*.test.js
+*.test.jsx
+*.spec.js
+*.spec.jsx
+
+# Dev files
+node_modules/
+.env
+.env.*
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CI
+.github/
