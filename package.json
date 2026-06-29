@@ -52,7 +52,7 @@
         "default": "./dist/Label.cjs"
       }
     },
-    "./css/datepicker.css": "./dist/css/datepicker-bootstrap.css"
+    "./css/datepicker.css": "./dist/css/datepicker.css"
   },
   "sideEffects": [
     "*.css",

@@ -48,7 +48,7 @@ DatePicker requires a small CSS file for its popover calendar layout. Import it 
 import 'react-bootstrap-plugins/css/datepicker.css'
 ```
 
-This resolves to the bundled `datepicker-bootstrap.css` via the package's `exports` map. No additional configuration is needed for modern bundlers.
+This resolves to `dist/css/datepicker.css` via the package's `exports` map. No additional configuration is needed for modern bundlers.
 
 #### Troubleshooting CSS import issues
 
@@ -63,7 +63,7 @@ If your bundler reports **"Cannot find module"** or fails to resolve the CSS imp
 - **For older webpack (v4)** — you may need to use the full path if your version doesn't support the `exports` field.
 
   ```js
-  import 'react-bootstrap-plugins/dist/css/datepicker-bootstrap.css'
+  import 'react-bootstrap-plugins/dist/css/datepicker.css'
   ```
 
 - **For Next.js** — add the package to `transpilePackages` in `next.config.mjs` if not already present.
@@ -448,7 +448,7 @@ src/
 │   ├── Label.jsx         Form label
 │   └── *.d.ts            TypeScript declarations
 └── css/
-    └── datepicker-bootstrap.css
+    └── datepicker.css
 ```
 
 ---
