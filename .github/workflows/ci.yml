@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build & Verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Verify dist output
+        run: |
+          echo "Checking build output..."
+          test -f dist/index.js || { echo "Missing dist/index.js"; exit 1; }
+          test -f dist/index.cjs || { echo "Missing dist/index.cjs"; exit 1; }
+          test -f dist/index.d.ts || { echo "Missing dist/index.d.ts"; exit 1; }
+          test -f dist/DatePicker.js || { echo "Missing dist/DatePicker.js"; exit 1; }
+          test -f dist/DatePicker.cjs || { echo "Missing dist/DatePicker.cjs"; exit 1; }
+          test -f dist/SearchSelect.js || { echo "Missing dist/SearchSelect.js"; exit 1; }
+          test -f dist/SearchSelect.cjs || { echo "Missing dist/SearchSelect.cjs"; exit 1; }
+          test -f dist/Label.js || { echo "Missing dist/Label.js"; exit 1; }
+          test -f dist/Label.cjs || { echo "Missing dist/Label.cjs"; exit 1; }
+          test -f dist/css/datepicker-bootstrap.css || { echo "Missing dist/css/datepicker-bootstrap.css"; exit 1; }
+          echo "All build artifacts present."
+
+      - name: Check package contents (dry run)
+        run: pnpm publish --dry-run --no-git-checks
