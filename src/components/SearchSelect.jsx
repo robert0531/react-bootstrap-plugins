@@ -11,8 +11,9 @@ import { cn } from '../lib/cn.js'
  * @param {string}   [valueKey='value']    - Key for the value when options are objects
  * @param {string}   [placeholder='Select...'] - Placeholder text
  * @param {any}      [value=null]          - Currently selected value
- * @param {(value: any) => void} [onChange] - Called with the selected value when user picks
+ * @param {(e: { target: { value: any, name: string } }) => void} [onChange] - Called with synthetic event; e.target.value is selected value, e.target.name is input name
  * @param {string}   [id='filterable-select'] - Input element ID
+ * @param {string}   [name]                - Input name attribute — surfaces as e.target.name in onChange
  * @param {boolean}  [disabled=false]      - Disable the input
  */
 const SearchSelect = React.forwardRef(({
@@ -24,6 +25,7 @@ const SearchSelect = React.forwardRef(({
   value = null,
   onChange = null,
   id = 'filterable-select',
+  name,
   disabled = false,
   ...props
 }, ref) => {
@@ -76,7 +78,7 @@ const SearchSelect = React.forwardRef(({
     const selectedValue = getValue(option)
     setSearchTerm(getLabel(option))
     setIsOpen(false)
-    if (onChange) onChange(selectedValue)
+    if (onChange) onChange({ target: { value: selectedValue, name: name || id } })
   }
 
   return (
@@ -150,3 +152,4 @@ const SearchSelect = React.forwardRef(({
 SearchSelect.displayName = 'SearchSelect'
 
 export default SearchSelect
+export { SearchSelect }

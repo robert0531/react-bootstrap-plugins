@@ -11,5 +11,5 @@
  */
 
 export { DatePicker } from './components/DatePicker.jsx'
-export { default as SearchSelect } from './components/SearchSelect.jsx'
+export { SearchSelect } from './components/SearchSelect.jsx'
 export { Label } from './components/Label.jsx'

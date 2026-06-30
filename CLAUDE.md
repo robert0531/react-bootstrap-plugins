@@ -21,7 +21,7 @@ react-bootstrap-plugins/
 │   │   ├── Label.jsx              # Form label with required indicator
 │   │   └── Label.d.ts
 │   └── css/
-│       └── datepicker-bootstrap.css   # Required CSS for DatePicker
+│       └── datepicker.css   # Required CSS for DatePicker
 ├── dist/                          # Build output (gitignored, shipped to npm)
 ├── tsup.config.ts                 # Build configuration
 ├── tsconfig.json                  # TypeScript config (DTS generation only)
@@ -118,7 +118,7 @@ This replaces the `clsx` + `tailwind-merge` pattern used in the main app — the
 3. Check `dist/` output:
    - `.js` and `.cjs` files for each entry
    - `.d.ts`, `.d.mts`, `.d.cts` for each entry
-   - `css/datepicker-bootstrap.css` exists
+   - `css/datepicker.css` exists
    - Shared chunks for `cn` utility
 4. `pnpm publish --dry-run` — verify package contents
 5. `pnpm publish` — publish to npm

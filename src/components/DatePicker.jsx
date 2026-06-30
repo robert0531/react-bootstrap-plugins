@@ -688,3 +688,4 @@ const DatePicker = React.forwardRef(({
 DatePicker.displayName = 'DatePicker'
 
 export { DatePicker }
+export default DatePicker

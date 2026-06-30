@@ -13,10 +13,12 @@ export interface SearchSelectProps<T = any> {
   placeholder?: string
   /** Currently selected value */
   value?: any
-  /** Called with the selected value when user picks */
-  onChange?: (value: any) => void
+  /** Called with synthetic event; e.target.value is the selected value, e.target.name is the input name */
+  onChange?: (e: { target: { value: any; name: string } }) => void
   /** Input element ID */
   id?: string
+  /** Input name attribute — surfaces as e.target.name in onChange */
+  name?: string
   /** Disable the input */
   disabled?: boolean
 }
@@ -26,3 +28,4 @@ declare const SearchSelect: React.ForwardRefExoticComponent<
 >
 
 export default SearchSelect
+export { SearchSelect }

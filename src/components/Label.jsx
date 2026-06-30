@@ -19,3 +19,4 @@ const Label = React.forwardRef(({ className, hf = 'default', required = true, la
 Label.displayName = 'Label'
 
 export { Label }
+export default Label
