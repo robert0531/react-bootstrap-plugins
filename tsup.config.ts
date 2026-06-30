@@ -6,6 +6,7 @@ export default defineConfig({
     DatePicker: 'src/components/DatePicker.jsx',
     SearchSelect: 'src/components/SearchSelect.jsx',
     Label: 'src/components/Label.jsx',
+    TableLoading: 'src/components/TableLoading.jsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
