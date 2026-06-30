@@ -19,7 +19,7 @@ const dist = resolve(root, 'dist')
 // Ensure dist exists
 mkdirSync(dist, { recursive: true })
 
-const components = ['DatePicker', 'SearchSelect', 'Label']
+const components = ['DatePicker', 'SearchSelect', 'Label', 'TableLoading']
 
 // Copy each component's hand-written .d.ts from src/ to dist/
 for (const name of components) {
@@ -45,6 +45,9 @@ export type { SearchSelectProps } from './SearchSelect.js'
 
 export { Label } from './Label.js'
 export type { LabelProps } from './Label.js'
+
+export { TableLoading } from './TableLoading.js'
+export type { TableLoadingProps } from './TableLoading.js'
 `
 
 writeFileSync(resolve(dist, 'index.d.ts'), barrel, 'utf-8')

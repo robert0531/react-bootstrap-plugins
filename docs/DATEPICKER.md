@@ -154,4 +154,4 @@ The DatePicker respects Bootstrap 5's dark mode. Set `data-bs-theme="dark"` on a
 
 - [SearchSelect](./SEARCHSELECT.md) — Filterable, searchable select dropdown
 - [Label](./LABEL.md) — Bootstrap-styled form label with required indicator
-- [Main README](./README.md) — Package overview, installation, and general info
+- [Main README](../README.md) — Package overview, installation, and general info

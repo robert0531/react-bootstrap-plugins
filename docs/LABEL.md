@@ -86,4 +86,4 @@ The Label respects Bootstrap 5's dark mode. Set `data-bs-theme="dark"` on any pa
 
 - [DatePicker](./DATEPICKER.md) — Date, time, and datetime picker
 - [SearchSelect](./SEARCHSELECT.md) — Filterable, searchable select dropdown
-- [Main README](./README.md) — Package overview, installation, and general info
+- [Main README](../README.md) — Package overview, installation, and general info

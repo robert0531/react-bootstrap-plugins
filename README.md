@@ -13,6 +13,7 @@
 | **DatePicker** | [DATEPICKER.md](./docs/DATEPICKER.md) | Date, time, and datetime picker with popover calendar |
 | **SearchSelect** | [SEARCHSELECT.md](./docs/SEARCHSELECT.md) | Filterable, searchable select dropdown |
 | **Label** | [LABEL.md](./docs/LABEL.md) | Bootstrap-styled form label with required indicator |
+| **TableLoading** | [TABLELOADING.md](./docs/TABLELOADING.md) | Bootstrap 5 placeholder loading skeleton for table `<tbody>` |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
@@ -104,14 +105,16 @@ All patterns are tree-shakeable. Your bundler will only include the code you act
 import DatePicker from 'react-bootstrap-plugins/DatePicker'
 import SearchSelect from 'react-bootstrap-plugins/SearchSelect'
 import Label from 'react-bootstrap-plugins/Label'
+import TableLoading from 'react-bootstrap-plugins/TableLoading'
 
 // Single component — named import
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
 import { SearchSelect } from 'react-bootstrap-plugins/SearchSelect'
 import { Label } from 'react-bootstrap-plugins/Label'
+import { TableLoading } from 'react-bootstrap-plugins/TableLoading'
 
 // Multiple named — barrel, tree-shaken
-import { DatePicker, SearchSelect, Label } from 'react-bootstrap-plugins'
+import { DatePicker, SearchSelect, Label, TableLoading } from 'react-bootstrap-plugins'
 
 // CSS (required for DatePicker)
 import 'react-bootstrap-plugins/css/datepicker.css'
@@ -154,7 +157,8 @@ function App() {
 | `DatePicker` (with CSS) | ~5.5 KB |
 | `SearchSelect` | ~1.2 KB |
 | `Label` | ~0.3 KB |
-| All three (barrel) | ~6.5 KB |
+| `TableLoading` | ~0.2 KB |
+| All four (barrel) | ~6.7 KB |
 
 Measured with ESM, tree-shaken, minified, gzipped. Your actual size depends on your bundler configuration.
 
@@ -208,6 +212,7 @@ src/
 │   ├── DatePicker.jsx    Date/time/datetime picker
 │   ├── SearchSelect.jsx  Searchable select dropdown
 │   ├── Label.jsx         Form label
+│   ├── TableLoading.jsx  Table placeholder skeleton
 │   └── *.d.ts            TypeScript declarations
 └── css/
     └── datepicker.css

@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "1.0.3",
-  "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, and more. Zero runtime dependencies beyond React.",
+  "version": "1.0.4",
+  "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
     "name": "Tumwesigye Robert",
@@ -52,6 +52,16 @@
         "default": "./dist/Label.cjs"
       }
     },
+    "./TableLoading": {
+      "import": {
+        "types": "./dist/TableLoading.d.ts",
+        "default": "./dist/TableLoading.js"
+      },
+      "require": {
+        "types": "./dist/TableLoading.d.ts",
+        "default": "./dist/TableLoading.cjs"
+      }
+    },
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
   "sideEffects": [
@@ -59,6 +69,7 @@
     "./dist/css/*.css"
   ],
   "files": [
+    "docs",
     "dist",
     "src",
     "LICENSE",
@@ -83,6 +94,9 @@
     "search-select",
     "select",
     "label",
+    "table-loading",
+    "placeholder",
+    "skeleton",
     "ui-components",
     "react-bootstrap",
     "form-controls",

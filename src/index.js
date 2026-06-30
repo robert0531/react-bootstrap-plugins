@@ -13,3 +13,4 @@
 export { DatePicker } from './components/DatePicker.jsx'
 export { SearchSelect } from './components/SearchSelect.jsx'
 export { Label } from './components/Label.jsx'
+export { TableLoading } from './components/TableLoading.jsx'
