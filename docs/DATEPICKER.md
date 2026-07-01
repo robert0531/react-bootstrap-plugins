@@ -17,7 +17,7 @@ import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
 import { DatePicker } from 'react-bootstrap-plugins'
 
 // Required CSS (import once, anywhere in your app)
-import 'react-bootstrap-plugins/css/datepicker.css'
+import 'react-bootstrap-plugins/css/plugins.css'
 ```
 
 ---
@@ -27,7 +27,7 @@ import 'react-bootstrap-plugins/css/datepicker.css'
 ```jsx
 import { useState } from 'react'
 import { DatePicker } from 'react-bootstrap-plugins'
-import 'react-bootstrap-plugins/css/datepicker.css'
+import 'react-bootstrap-plugins/css/plugins.css'
 
 function MyForm() {
   const [date, setDate] = useState(null)
@@ -131,7 +131,7 @@ DatePicker requires a small CSS file for its popover calendar layout. Import it 
 
 ```js
 // Recommended — uses the package exports map
-import 'react-bootstrap-plugins/css/datepicker.css'
+import 'react-bootstrap-plugins/css/plugins.css'
 ```
 
 For troubleshooting CSS import issues, see the [main README](./README.md#css-imports).

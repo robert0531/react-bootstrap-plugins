@@ -3,6 +3,56 @@ import { createPortal } from 'react-dom'
 import { cn } from '../lib/cn.js'
 
 /* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
+
+export interface DatePickerChangeEvent {
+  target: {
+    value: string | null
+    name: string
+    type: string
+  }
+  preventDefault: () => void
+  stopPropagation: () => void
+  nativeEvent: null
+}
+
+export interface DatePickerProps {
+  /** Picker mode (default 'date') */
+  mode?: 'date' | 'time' | 'datetime'
+  /** Currently selected Date (alias for value) */
+  selected?: Date | null
+  /** Currently selected Date, ISO string, "hh:mm AA" time string, "YYYY-MM-DD hh:mm AA" datetime string, or timestamp */
+  value?: Date | string | number | null
+  /** Synthetic event handler — e.target.value is a pre-formatted string */
+  onChange?: (e: DatePickerChangeEvent) => void
+  /** Display format with tokens: yyyy, MM, dd, hh, mm, aa */
+  dateFormat?: string
+  /** Placeholder text when empty */
+  placeholderText?: string
+  /** Bootstrap size variant */
+  size?: 'sm' | 'lg'
+  /** Show a clear button on the input */
+  isClearable?: boolean
+  /** Disable the input */
+  disabled?: boolean
+  /** Earliest selectable date */
+  minDate?: Date
+  /** Latest selectable date */
+  maxDate?: Date
+  /** Minute step in the time list (default 5) */
+  timeIntervals?: number
+  /** Timezone identifier (default 'Kampala') */
+  timezone?: string
+  /** Additional CSS classes on the input */
+  className?: string
+  /** Input element ID */
+  id?: string
+  /** Input name attribute — surfaces as e.target.name in onChange */
+  name?: string
+}
+
+/* ------------------------------------------------------------------ */
 /*  Constants                                                         */
 /* ------------------------------------------------------------------ */
 
@@ -18,21 +68,31 @@ const YEARS_PER_PAGE = 12
 /*  Helpers                                                           */
 /* ------------------------------------------------------------------ */
 
-const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
+const daysInMonth = (year: number, month: number): number =>
+  new Date(year, month + 1, 0).getDate()
 
-const isSameDay = (a, b) =>
-  a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+const isSameDay = (a: Date | null, b: Date | null): boolean =>
+  a !== null && b !== null &&
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate()
 
-const isDateInRange = (date, min, max) => {
+const isDateInRange = (date: Date, min: Date | null, max: Date | null): boolean => {
   if (min && date < new Date(min.getFullYear(), min.getMonth(), min.getDate())) return false
   if (max && date > new Date(max.getFullYear(), max.getMonth(), max.getDate())) return false
   return true
 }
 
-const buildCalendarGrid = (year, month) => {
+interface CalendarCell {
+  day: number
+  date: Date
+  isOutside: boolean
+}
+
+const buildCalendarGrid = (year: number, month: number): CalendarCell[] => {
   const firstDay = new Date(year, month, 1).getDay()
   const totalDays = daysInMonth(year, month)
-  const cells = []
+  const cells: CalendarCell[] = []
 
   const prevMonthDays = daysInMonth(year, month - 1)
   for (let i = firstDay - 1; i >= 0; i--) {
@@ -52,7 +112,7 @@ const buildCalendarGrid = (year, month) => {
   return cells
 }
 
-const formatValue = (date, mode, fmt) => {
+const formatValue = (date: Date | null, mode: string, fmt?: string): string => {
   if (!date || isNaN(date.getTime())) return ''
 
   const y = date.getFullYear()
@@ -65,7 +125,7 @@ const formatValue = (date, mode, fmt) => {
   const hh = String(h).padStart(2, '0')
 
   if (fmt) {
-    return fmt.replace('yyyy', y).replace('MM', M).replace('dd', d).replace('hh', hh).replace('mm', m).replace('aa', a)
+    return fmt.replace('yyyy', String(y)).replace('MM', M).replace('dd', d).replace('hh', hh).replace('mm', m).replace('aa', a)
   }
 
   switch (mode) {
@@ -77,9 +137,8 @@ const formatValue = (date, mode, fmt) => {
 
 /**
  * Build a synthetic event object like a native input's onChange.
- * { target: { value, name, type }, preventDefault, stopPropagation }
  */
-const makeEvent = (value, inputName, type = 'date') => ({
+const makeEvent = (value: string | null, inputName: string, type: string = 'date'): DatePickerChangeEvent => ({
   target: {
     value,
     name: inputName,
@@ -95,15 +154,15 @@ const makeEvent = (value, inputName, type = 'date') => ({
 /* ------------------------------------------------------------------ */
 
 /** Approximate heights — used as a first guess before the real DOM height is measured. */
-const POPOVER_GUESS = { date: 300, time: 300, datetime: 400, year: 250 }
+const POPOVER_GUESS: Record<string, number> = { date: 300, time: 300, datetime: 400, year: 250 }
 
 /**
  * Find the nearest scrollable ancestor (for capturing scroll events inside
  * modals / side panels / custom containers).
  */
-const getScrollParent = (el) => {
+const getScrollParent = (el: HTMLElement | null): HTMLElement => {
   if (!el) return document.documentElement
-  let parent = el.parentElement
+  let parent: HTMLElement | null = el.parentElement
   while (parent) {
     const style = window.getComputedStyle(parent)
     const overflowY = style.overflowY || style.overflow
@@ -113,7 +172,7 @@ const getScrollParent = (el) => {
   return document.documentElement
 }
 
-const calcPopoverStyle = (inputEl, popoverHeight) => {
+const calcPopoverStyle = (inputEl: HTMLElement | null, popoverHeight: number): React.CSSProperties => {
   if (!inputEl) return {}
   const rect = inputEl.getBoundingClientRect()
   const h = popoverHeight || 300
@@ -146,26 +205,10 @@ const calcPopoverStyle = (inputEl, popoverHeight) => {
  *
  * **Important:** The accompanying CSS **must** be imported for the picker to render correctly:
  * ```js
- * import 'react-bootstrap-plugins/css/datepicker.css'
+ * import 'react-bootstrap-plugins/css/plugins.css'
  * ```
- *
- * @param {'date'|'time'|'datetime'} mode     - Picker mode (default 'date')
- * @param {Date|null} value                    - Currently selected Date (aliases: selected)
- * @param {(e: { target: { value: string|null, name: string, type: string } }) => void} onChange
- *                                             - Synthetic event handler — e.target.value is a pre-formatted string
- *                                               (date → "YYYY-MM-DD", time → "hh:mm AA", datetime → "YYYY-MM-DD hh:mm AA")
- * @param {string}  [dateFormat]               - Display format (yyyy, MM, dd, hh, mm, aa)
- * @param {string}  [placeholderText]          - Placeholder when empty
- * @param {'sm'|'lg'} [size]                  - Bootstrap size variant
- * @param {boolean} [isClearable=false]        - Show a clear button on the input
- * @param {boolean} [disabled=false]           - Disable the input
- * @param {Date}    [minDate]                 - Earliest selectable date
- * @param {Date}    [maxDate]                 - Latest selectable date
- * @param {number}  [timeIntervals=5]          - Minute step in the time list
- * @param {string}  [timezone='Kampala']       - Timezone identifier for the picker
- * @param {string}  [className]               - Additional classes on the input
  */
-const DatePicker = React.forwardRef(({
+const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   className,
   mode = 'date',
   selected,
@@ -185,7 +228,7 @@ const DatePicker = React.forwardRef(({
   ...props
 }, ref) => {
   /* ---- derived ---- */
-  const resolveValue = (v) => {
+  const resolveValue = (v: Date | string | number | null | undefined): Date | null => {
     if (!v) return null
     if (v instanceof Date) return isNaN(v.getTime()) ? null : v
     if (typeof v === 'string' || typeof v === 'number') {
@@ -237,7 +280,7 @@ const DatePicker = React.forwardRef(({
     resolvedValue ? resolvedValue.getFullYear() : new Date().getFullYear())
   const [viewMonth, setViewMonth] = React.useState(() =>
     resolvedValue ? resolvedValue.getMonth() : new Date().getMonth())
-  const [tempDate, setTempDate] = React.useState(resolvedValue)
+  const [tempDate, setTempDate] = React.useState<Date | null>(resolvedValue)
   const [tempHours, setTempHours] = React.useState(() =>
     resolvedValue ? (resolvedValue.getHours() % 12 || 12) : 12)
   const [tempMins, setTempMins] = React.useState(() =>
@@ -248,11 +291,11 @@ const DatePicker = React.forwardRef(({
   const [yearPage, setYearPage] = React.useState(() =>
     Math.floor((resolvedValue ? resolvedValue.getFullYear() : new Date().getFullYear()) / YEARS_PER_PAGE) * YEARS_PER_PAGE
   )
-  const [popoverStyle, setPopoverStyle] = React.useState({})
+  const [popoverStyle, setPopoverStyle] = React.useState<React.CSSProperties>({})
 
-  const inputRef = React.useRef(null)
-  const popoverRef = React.useRef(null)
-  const portalRef = React.useRef(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const popoverRef = React.useRef<HTMLDivElement>(null)
+  const portalRef = React.useRef<HTMLDivElement | null>(null)
 
   /* ---- portal container ---- */
   React.useEffect(() => {
@@ -286,7 +329,7 @@ const DatePicker = React.forwardRef(({
     if (!isOpen) return
 
     /* Measure actual popover height so we position with no wasted space */
-    const getHeight = () => {
+    const getHeight = (): number => {
       if (popoverRef.current) {
         return popoverRef.current.getBoundingClientRect().height
       }
@@ -315,9 +358,9 @@ const DatePicker = React.forwardRef(({
   /* ---- click outside to close ---- */
   React.useEffect(() => {
     if (!isOpen) return
-    const handler = (e) => {
-      if (popoverRef.current && !popoverRef.current.contains(e.target) &&
-          inputRef.current && !inputRef.current.contains(e.target)) {
+    const handler = (e: MouseEvent) => {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node) &&
+          inputRef.current && !inputRef.current.contains(e.target as Node)) {
         setIsOpen(false)
         setShowYearPicker(false)
       }
@@ -327,7 +370,7 @@ const DatePicker = React.forwardRef(({
   }, [isOpen])
 
   /* ---- commit helpers ---- */
-  const buildDate = (base, h12, mins, ampm) => {
+  const buildDate = (base: Date, h12: number, mins: number, ampm: string): Date => {
     const d = new Date(base)
     let h = h12 % 12
     if (ampm === 'PM') h += 12
@@ -340,15 +383,15 @@ const DatePicker = React.forwardRef(({
    * Fire onChange with a pre-built date without closing the popover.
    * Callers must build the complete date (including time) before passing it in.
    */
-  const fireChange = (date) => {
+  const fireChange = (date: Date | null): void => {
     if (!date || isNaN(date.getTime())) return
     const formatted = formatValue(date, mode, dateFormat)
-    onChange?.(makeEvent(formatted, name, mode))
+    onChange?.(makeEvent(formatted, name || '', mode))
   }
 
-  const commit = (date) => {
+  const commit = (date: Date | null): void => {
     if (!date) {
-      onChange?.(makeEvent(null, name, mode))
+      onChange?.(makeEvent(null, name || '', mode))
       setIsOpen(false)
       setShowYearPicker(false)
       return
@@ -357,7 +400,7 @@ const DatePicker = React.forwardRef(({
     if (mode === 'date') { setIsOpen(false); setShowYearPicker(false) }
   }
 
-  const commitDateOnly = (date) => {
+  const commitDateOnly = (date: Date): void => {
     setTempDate(date)
     if (mode === 'date') {
       commit(date)
@@ -399,25 +442,25 @@ const DatePicker = React.forwardRef(({
   const maxDt = maxDate ? new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate()) : null
 
   /* ---- time change handlers ---- */
-  const handleHourChange = (h) => {
+  const handleHourChange = (h: number) => {
     setTempHours(h)
     if (showTime) {
       const d = buildDate(tempDate || new Date(), h, tempMins, tempAmPm)
-      onChange?.(makeEvent(formatValue(d, mode, dateFormat), name, mode))
+      onChange?.(makeEvent(formatValue(d, mode, dateFormat), name || '', mode))
     }
   }
-  const handleMinChange = (m) => {
+  const handleMinChange = (m: number) => {
     setTempMins(m)
     if (showTime) {
       const d = buildDate(tempDate || new Date(), tempHours, m, tempAmPm)
-      onChange?.(makeEvent(formatValue(d, mode, dateFormat), name, mode))
+      onChange?.(makeEvent(formatValue(d, mode, dateFormat), name || '', mode))
     }
   }
-  const handleAmPmChange = (ap) => {
+  const handleAmPmChange = (ap: string) => {
     setTempAmPm(ap)
     if (showTime) {
       const d = buildDate(tempDate || new Date(), tempHours, tempMins, ap)
-      onChange?.(makeEvent(formatValue(d, mode, dateFormat), name, mode))
+      onChange?.(makeEvent(formatValue(d, mode, dateFormat), name || '', mode))
     }
   }
 
@@ -427,7 +470,7 @@ const DatePicker = React.forwardRef(({
     setShowYearPicker(true)
   }
 
-  const handleYearSelect = (y) => {
+  const handleYearSelect = (y: number) => {
     setViewYear(y)
     setShowYearPicker(false)
     const base = tempDate || new Date()
@@ -441,14 +484,14 @@ const DatePicker = React.forwardRef(({
   const years = Array.from({ length: YEARS_PER_PAGE }, (_, i) => yearPageStart + i)
 
   /* ---- clear ---- */
-  const handleClear = (e) => {
+  const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation()
     setTempDate(null)
-    onChange?.(makeEvent(null, name))
+    onChange?.(makeEvent(null, name || ''))
   }
 
   /* ---- keyboard ---- */
-  const handleInputKeyDown = (e) => {
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') { setIsOpen(false); setShowYearPicker(false); inputRef.current?.blur() }
     if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
@@ -457,7 +500,7 @@ const DatePicker = React.forwardRef(({
   }
 
   /* ---- merged ref ---- */
-  const mergeInputRef = React.useCallback((node) => {
+  const mergeInputRef = React.useCallback((node: HTMLInputElement | null) => {
     inputRef.current = node
     if (typeof ref === 'function') ref(node)
     else if (ref) ref.current = node
@@ -638,7 +681,7 @@ const DatePicker = React.forwardRef(({
   )
 
   return (
-    <div className="position-relative d-inline-block w-100" style={{ minWidth: 0 }}>
+    <div className="datepicker-wrapper position-relative d-inline-block w-100" style={{ minWidth: 0 }}>
       {/* ---- Input ---- */}
       <div className="position-relative">
         <input

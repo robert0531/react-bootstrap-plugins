@@ -21,7 +21,7 @@ react-bootstrap-plugins/
 │   │   ├── Label.jsx              # Form label with required indicator
 │   │   └── Label.d.ts
 │   └── css/
-│       └── datepicker.css   # Required CSS for DatePicker
+│       └── plugins.css   # Required CSS for DatePicker + SearchSelect
 ├── dist/                          # Build output (gitignored, shipped to npm)
 ├── tsup.config.ts                 # Build configuration
 ├── tsconfig.json                  # TypeScript config (DTS generation only)
@@ -53,7 +53,7 @@ The `package.json` exports map provides three levels of access:
 | `react-bootstrap-plugins/DatePicker` | DatePicker only (tree-shaken) |
 | `react-bootstrap-plugins/SearchSelect` | SearchSelect only |
 | `react-bootstrap-plugins/Label` | Label only |
-| `react-bootstrap-plugins/css/datepicker.css` | DatePicker CSS |
+| `react-bootstrap-plugins/css/plugins.css` | DatePicker CSS |
 
 Each subpath export has `import` (ESM) and `require` (CJS) conditions, plus `types` for TypeScript.
 
@@ -69,7 +69,7 @@ Each subpath export has `import` (ESM) and `require` (CJS) conditions, plus `typ
 ### CSS Imports
 The DatePicker CSS **must** be imported separately by consumers:
 ```js
-import 'react-bootstrap-plugins/css/datepicker.css'
+import 'react-bootstrap-plugins/css/plugins.css'
 ```
 This is intentional — it gives consumers control over CSS loading order and allows CSS bundler optimizations.
 
@@ -118,7 +118,8 @@ This replaces the `clsx` + `tailwind-merge` pattern used in the main app — the
 3. Check `dist/` output:
    - `.js` and `.cjs` files for each entry
    - `.d.ts`, `.d.mts`, `.d.cts` for each entry
-   - `css/datepicker.css` exists
+   - `css/plugins.css` exists
+   - `css/datepicker.css` exists (backward-compat copy)
    - Shared chunks for `cn` utility
 4. `pnpm publish --dry-run` — verify package contents
 5. `pnpm publish` — publish to npm
@@ -129,7 +130,7 @@ This replaces the `clsx` + `tailwind-merge` pattern used in the main app — the
 |---|---|---|
 | 1 | Adding a dependency not in `external` | `react`, `react-dom`, and `react/jsx-runtime` must stay in tsup `external` |
 | 2 | Using `@/` path aliases | Always use relative imports (`../lib/cn.js`) |
-| 3 | Forgetting CSS import | DatePicker renders without CSS — users must `import 'react-bootstrap-plugins/css/datepicker.css'` |
+| 3 | Forgetting CSS import | DatePicker renders without CSS — users must `import 'react-bootstrap-plugins/css/plugins.css'` |
 | 4 | Missing export map entry | Each new component needs `package.json` exports updated |
 | 5 | Forgetting `sideEffects` update | CSS files must be listed in `sideEffects` for tree-shaking to work |
 | 6 | Using `export default` for new components | Prefer named exports; re-export in barrel with `{ default as X }` if needed |

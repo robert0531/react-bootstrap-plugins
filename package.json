@@ -62,23 +62,27 @@
         "default": "./dist/TableLoading.cjs"
       }
     },
+    "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
   "sideEffects": [
     "*.css",
-    "./dist/css/*.css"
+    "./dist/css/plugins.css",
+    "./dist/css/datepicker.css"
+  ],
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "maintained node versions"
   ],
   "files": [
     "docs",
     "dist",
-    "src",
     "LICENSE",
-    "README.md",
-    "CHANGELOG.md"
+    "README.md"
   ],
   "scripts": {
-    "build": "tsup && node scripts/copy-types.mjs && rm -rf dist/css && cp -r src/css dist/css",
-    "build:types": "node scripts/copy-types.mjs",
+    "build": "tsup && node scripts/build-css.mjs",
+    "build:types": "tsup --dts-only",
     "dev": "tsup --watch",
     "prepublishOnly": "pnpm run build",
     "lint": "echo 'Lint passed'",
@@ -124,10 +128,10 @@
       "optional": false
     }
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "lightningcss": "^1.32.0",
     "tsup": "^8.3.0",
     "typescript": "^5.6.0"
   },

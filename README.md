@@ -60,10 +60,12 @@ DatePicker requires a small CSS file for its popover calendar layout. Import it 
 
 ```js
 // Recommended — uses the package exports map (works with Vite, webpack 5+, Turbopack, Rollup)
-import 'react-bootstrap-plugins/css/datepicker.css'
+import 'react-bootstrap-plugins/css/plugins.css'
 ```
 
-This resolves to `dist/css/datepicker.css` via the package's `exports` map. No additional configuration is needed for modern bundlers.
+This resolves to `dist/css/plugins.css` via the package's `exports` map. No additional configuration is needed for modern bundlers.
+
+> **Backward compatibility:** The old path `react-bootstrap-plugins/css/datepicker.css` still works — it points to the same file. Prefer the new `plugins.css` path for new code.
 
 #### Troubleshooting CSS import issues
 
@@ -78,7 +80,7 @@ If your bundler reports **"Cannot find module"** or fails to resolve the CSS imp
 - **For older webpack (v4)** — you may need to use the full path if your version doesn't support the `exports` field.
 
   ```js
-  import 'react-bootstrap-plugins/dist/css/datepicker.css'
+  import 'react-bootstrap-plugins/dist/css/plugins.css'
   ```
 
 - **For Next.js** — add the package to `transpilePackages` in `next.config.mjs` if not already present.
@@ -117,7 +119,7 @@ import { TableLoading } from 'react-bootstrap-plugins/TableLoading'
 import { DatePicker, SearchSelect, Label, TableLoading } from 'react-bootstrap-plugins'
 
 // CSS (required for DatePicker)
-import 'react-bootstrap-plugins/css/datepicker.css'
+import 'react-bootstrap-plugins/css/plugins.css'
 ```
 
 Every component supports **both** default and named imports — use whichever fits your codebase conventions.
@@ -215,7 +217,7 @@ src/
 │   ├── TableLoading.jsx  Table placeholder skeleton
 │   └── *.d.ts            TypeScript declarations
 └── css/
-    └── datepicker.css
+    └── plugins.css
 ```
 
 ---
