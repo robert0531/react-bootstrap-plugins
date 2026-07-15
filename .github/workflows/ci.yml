@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -46,7 +46,13 @@ jobs:
           test -f dist/SearchSelect.cjs || { echo "Missing dist/SearchSelect.cjs"; exit 1; }
           test -f dist/Label.js || { echo "Missing dist/Label.js"; exit 1; }
           test -f dist/Label.cjs || { echo "Missing dist/Label.cjs"; exit 1; }
-          test -f dist/css/datepicker-bootstrap.css || { echo "Missing dist/css/datepicker-bootstrap.css"; exit 1; }
+          test -f dist/TableLoading.js || { echo "Missing dist/TableLoading.js"; exit 1; }
+          test -f dist/TableLoading.cjs || { echo "Missing dist/TableLoading.cjs"; exit 1; }
+          test -f dist/AutoTextarea.js || { echo "Missing dist/AutoTextarea.js"; exit 1; }
+          test -f dist/AutoTextarea.cjs || { echo "Missing dist/AutoTextarea.cjs"; exit 1; }
+          test -f dist/NavPills.js || { echo "Missing dist/NavPills.js"; exit 1; }
+          test -f dist/NavPills.cjs || { echo "Missing dist/NavPills.cjs"; exit 1; }
+          test -f dist/css/plugins.css || { echo "Missing dist/css/plugins.css"; exit 1; }
           echo "All build artifacts present."
 
       - name: Check package contents (dry run)

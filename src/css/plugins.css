@@ -348,7 +348,7 @@
 /* Active pill: keep badges legible on the primary background */
 .nav-link.active .navpills-badge-clear {
   color: #fff;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(207, 21, 21, 0.836);
 }
 
 /* "New" badge (soft success) */
