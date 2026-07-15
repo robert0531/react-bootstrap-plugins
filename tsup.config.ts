@@ -9,6 +9,7 @@ export default defineConfig({
     TableLoading: 'src/components/TableLoading.tsx',
     AutoTextarea: 'src/components/AutoTextarea.tsx',
     NavPills: 'src/components/NavPills.tsx',
+    AutoDisplay: 'src/components/AutoDisplay.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],

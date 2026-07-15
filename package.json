@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -70,6 +70,16 @@
       "require": {
         "types": "./dist/AutoTextarea.d.ts",
         "default": "./dist/AutoTextarea.cjs"
+      }
+    },
+    "./AutoDisplay": {
+      "import": {
+        "types": "./dist/AutoDisplay.d.ts",
+        "default": "./dist/AutoDisplay.js"
+      },
+      "require": {
+        "types": "./dist/AutoDisplay.d.ts",
+        "default": "./dist/AutoDisplay.cjs"
       }
     },
     "./NavPills": {
