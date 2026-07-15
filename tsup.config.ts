@@ -7,6 +7,7 @@ export default defineConfig({
     SearchSelect: 'src/components/SearchSelect.tsx',
     Label: 'src/components/Label.tsx',
     TableLoading: 'src/components/TableLoading.tsx',
+    AutoTextarea: 'src/components/AutoTextarea.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],

@@ -14,6 +14,7 @@
 | **SearchSelect** | [SEARCHSELECT.md](./docs/SEARCHSELECT.md) | Filterable, searchable select dropdown |
 | **Label** | [LABEL.md](./docs/LABEL.md) | Bootstrap-styled form label with required indicator |
 | **TableLoading** | [TABLELOADING.md](./docs/TABLELOADING.md) | Bootstrap 5 placeholder loading skeleton for table `<tbody>` |
+| **AutoTextarea** | [AUTOTEXTAREA.md](./docs/AUTOTEXTAREA.md) | Auto-resizing textarea — grows with content up to `maxRows`/`maxHeight`, then scrolls |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
@@ -108,15 +109,17 @@ import DatePicker from 'react-bootstrap-plugins/DatePicker'
 import SearchSelect from 'react-bootstrap-plugins/SearchSelect'
 import Label from 'react-bootstrap-plugins/Label'
 import TableLoading from 'react-bootstrap-plugins/TableLoading'
+import AutoTextarea from 'react-bootstrap-plugins/AutoTextarea'
 
 // Single component — named import
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
 import { SearchSelect } from 'react-bootstrap-plugins/SearchSelect'
 import { Label } from 'react-bootstrap-plugins/Label'
 import { TableLoading } from 'react-bootstrap-plugins/TableLoading'
+import { AutoTextarea } from 'react-bootstrap-plugins/AutoTextarea'
 
 // Multiple named — barrel, tree-shaken
-import { DatePicker, SearchSelect, Label, TableLoading } from 'react-bootstrap-plugins'
+import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea } from 'react-bootstrap-plugins'
 
 // CSS (required for DatePicker)
 import 'react-bootstrap-plugins/css/plugins.css'
@@ -160,7 +163,8 @@ function App() {
 | `SearchSelect` | ~1.2 KB |
 | `Label` | ~0.3 KB |
 | `TableLoading` | ~0.2 KB |
-| All four (barrel) | ~6.7 KB |
+| `AutoTextarea` | ~0.4 KB |
+| All five (barrel) | ~7.1 KB |
 
 Measured with ESM, tree-shaken, minified, gzipped. Your actual size depends on your bundler configuration.
 
@@ -215,6 +219,7 @@ src/
 │   ├── SearchSelect.jsx  Searchable select dropdown
 │   ├── Label.jsx         Form label
 │   ├── TableLoading.jsx  Table placeholder skeleton
+│   ├── AutoTextarea.jsx  Auto-resizing textarea
 │   └── *.d.ts            TypeScript declarations
 └── css/
     └── plugins.css

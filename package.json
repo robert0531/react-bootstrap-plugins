@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -62,6 +62,16 @@
         "default": "./dist/TableLoading.cjs"
       }
     },
+    "./AutoTextarea": {
+      "import": {
+        "types": "./dist/AutoTextarea.d.ts",
+        "default": "./dist/AutoTextarea.js"
+      },
+      "require": {
+        "types": "./dist/AutoTextarea.d.ts",
+        "default": "./dist/AutoTextarea.cjs"
+      }
+    },
     "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
@@ -102,6 +112,9 @@
     "table-loading",
     "placeholder",
     "skeleton",
+    "textarea",
+    "auto-resize",
+    "autosize",
     "ui-components",
     "react-bootstrap",
     "form-controls",

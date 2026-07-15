@@ -156,6 +156,9 @@ const makeEvent = (value: string | null, inputName: string, type: string = 'date
 /** Approximate heights — used as a first guess before the real DOM height is measured. */
 const POPOVER_GUESS: Record<string, number> = { date: 300, time: 300, datetime: 400, year: 250 }
 
+/** Approximate widths — used as a first guess before the real DOM width is measured. */
+const POPOVER_WIDTH_GUESS: Record<string, number> = { date: 280, time: 220, datetime: 440, year: 280 }
+
 /**
  * Find the nearest scrollable ancestor (for capturing scroll events inside
  * modals / side panels / custom containers).
@@ -172,7 +175,7 @@ const getScrollParent = (el: HTMLElement | null): HTMLElement => {
   return document.documentElement
 }
 
-const calcPopoverStyle = (inputEl: HTMLElement | null, popoverHeight: number): React.CSSProperties => {
+const calcPopoverStyle = (inputEl: HTMLElement | null, popoverHeight: number, popoverWidth: number): React.CSSProperties => {
   if (!inputEl) return {}
   const rect = inputEl.getBoundingClientRect()
   const h = popoverHeight || 300
@@ -183,14 +186,18 @@ const calcPopoverStyle = (inputEl: HTMLElement | null, popoverHeight: number): R
   /* Only flip above when below is truly too tight AND above offers more room */
   const placeAbove = spaceBelow < h && spaceAbove > spaceBelow
 
-  /* Responsive: use smaller min-width on mobile to prevent overflow */
-  const minW = Math.max(rect.width, window.innerWidth < 576 ? 220 : 260)
+  /* Responsive: use smaller min-width on mobile to prevent overflow.
+     The popover sizes to its content — it must NOT stretch with a wide input,
+     so rect.width is intentionally ignored for sizing. */
+  const minW = window.innerWidth < 576 ? 220 : 260
+  const w = popoverWidth || minW
 
   return {
     position: 'fixed',
     top: placeAbove ? Math.max(4, rect.top - h - 4) : rect.bottom + 4,
-    left: Math.max(4, Math.min(rect.left, window.innerWidth - minW - 4)),
+    left: Math.max(4, Math.min(rect.left, window.innerWidth - w - 4)),
     minWidth: minW,
+    width: 'max-content',
     maxWidth: window.innerWidth - 8,
     zIndex: 1070,
   }
@@ -328,12 +335,18 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   React.useEffect(() => {
     if (!isOpen) return
 
-    /* Measure actual popover height so we position with no wasted space */
+    /* Measure actual popover size so we position with no wasted space */
     const getHeight = (): number => {
       if (popoverRef.current) {
         return popoverRef.current.getBoundingClientRect().height
       }
       return POPOVER_GUESS[showYearPicker ? 'year' : mode] || 300
+    }
+    const getWidth = (): number => {
+      if (popoverRef.current) {
+        return popoverRef.current.getBoundingClientRect().width
+      }
+      return POPOVER_WIDTH_GUESS[showYearPicker ? 'year' : mode] || 280
     }
 
     const scrollParent = getScrollParent(inputRef.current)
@@ -341,7 +354,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
     const update = () => {
       /* Force a paint frame so the popover has its real size */
       requestAnimationFrame(() => {
-        setPopoverStyle(calcPopoverStyle(inputRef.current, getHeight()))
+        setPopoverStyle(calcPopoverStyle(inputRef.current, getHeight(), getWidth()))
       })
     }
     update()
