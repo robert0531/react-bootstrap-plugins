@@ -363,8 +363,3 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.6);
 }
-
-/* Dark mode: .bg-light bar adapts to the dark body */
-[data-bs-theme="dark"] .navpills-bar.bg-light {
-  background-color: var(--bs-tertiary-bg, #2b3035) !important;
-}
