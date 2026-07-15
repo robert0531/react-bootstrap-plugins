@@ -322,3 +322,49 @@
     min-height: 34px;
   }
 }
+
+/* ==========================================================================
+   NavPills — horizontal pill tab strip
+   ========================================================================== */
+
+.navpills-bar {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Dismiss badge (soft danger) */
+.navpills-badge-clear {
+  color: var(--bs-danger, #dc3545);
+  background-color: rgba(var(--bs-danger-rgb, 220, 53, 69), 0.12);
+  font-size: 10px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.navpills-badge-clear:hover {
+  background-color: rgba(var(--bs-danger-rgb, 220, 53, 69), 0.25);
+}
+
+/* Active pill: keep badges legible on the primary background */
+.nav-link.active .navpills-badge-clear {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* "New" badge (soft success) */
+.navpills-badge-new {
+  color: var(--bs-success, #198754);
+  background-color: rgba(var(--bs-success-rgb, 25, 135, 84), 0.12);
+  border: 1px solid var(--bs-success, #198754);
+}
+
+.nav-link.active .navpills-badge-new {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Dark mode: .bg-light bar adapts to the dark body */
+[data-bs-theme="dark"] .navpills-bar.bg-light {
+  background-color: var(--bs-tertiary-bg, #2b3035) !important;
+}

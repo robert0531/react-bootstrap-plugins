@@ -57,8 +57,8 @@ function MyForm() {
 | `size` | `'sm'` \| `'lg'` | — | Bootstrap input size variant |
 | `isClearable` | `boolean` | `false` | Show clear button |
 | `disabled` | `boolean` | `false` | Disable the input |
-| `minDate` | `Date` | — | Earliest selectable date |
-| `maxDate` | `Date` | — | Latest selectable date |
+| `minDate` | `Date` \| `string` \| `number` | — | Earliest selectable date. Accepts the same flexible inputs as `value` — e.g. another DatePicker's formatted `onChange` string |
+| `maxDate` | `Date` \| `string` \| `number` | — | Latest selectable date. Accepts the same flexible inputs as `value` |
 | `timeIntervals` | `number` | `5` | Minute step in time picker |
 | `timezone` | `string` | `'Kampala'` | Timezone label |
 | `className` | `string` | — | Additional CSS classes on the input |
@@ -105,6 +105,27 @@ function MyForm() {
   dateFormat="dd/MM/yyyy hh:mm aa"
 />
 // e.target.value → "29/06/2026 02:30 PM"
+```
+
+### Linked pickers (start date bounds end date)
+
+`minDate`/`maxDate` accept the formatted string another picker emits, so linking two pickers needs no conversion:
+
+```jsx
+const [startDate, setStartDate] = useState(null)
+const [endDate, setEndDate] = useState(null)
+
+<DatePicker
+  name="startDate"
+  value={startDate}
+  onChange={(e) => setStartDate(e.target.value)}
+/>
+<DatePicker
+  name="endDate"
+  value={endDate}
+  onChange={(e) => setEndDate(e.target.value)}
+  minDate={startDate}   // "2026-07-15" string works directly
+/>
 ```
 
 ### With Bootstrap form layout

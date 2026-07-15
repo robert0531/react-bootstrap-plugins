@@ -72,6 +72,16 @@
         "default": "./dist/AutoTextarea.cjs"
       }
     },
+    "./NavPills": {
+      "import": {
+        "types": "./dist/NavPills.d.ts",
+        "default": "./dist/NavPills.js"
+      },
+      "require": {
+        "types": "./dist/NavPills.d.ts",
+        "default": "./dist/NavPills.cjs"
+      }
+    },
     "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
@@ -115,6 +125,8 @@
     "textarea",
     "auto-resize",
     "autosize",
+    "nav-pills",
+    "tabs",
     "ui-components",
     "react-bootstrap",
     "form-controls",

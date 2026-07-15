@@ -36,10 +36,10 @@ export interface DatePickerProps {
   isClearable?: boolean
   /** Disable the input */
   disabled?: boolean
-  /** Earliest selectable date */
-  minDate?: Date
-  /** Latest selectable date */
-  maxDate?: Date
+  /** Earliest selectable date — Date, ISO/"YYYY-MM-DD" string, or timestamp (e.g. another DatePicker's onChange value) */
+  minDate?: Date | string | number | null
+  /** Latest selectable date — Date, ISO/"YYYY-MM-DD" string, or timestamp (e.g. another DatePicker's onChange value) */
+  maxDate?: Date | string | number | null
   /** Minute step in the time list (default 5) */
   timeIntervals?: number
   /** Timezone identifier (default 'Kampala') */
@@ -158,6 +158,26 @@ const POPOVER_GUESS: Record<string, number> = { date: 300, time: 300, datetime: 
 
 /** Approximate widths — used as a first guess before the real DOM width is measured. */
 const POPOVER_WIDTH_GUESS: Record<string, number> = { date: 280, time: 220, datetime: 440, year: 280 }
+
+/**
+ * Style applied while the popover is mounted but not yet measured.
+ * `width: max-content` makes the first measurement reflect the real content
+ * width (an empty style lets the card stretch to the body width, which
+ * poisoned the first-open position), and `visibility: hidden` prevents a
+ * mispositioned flash before the measured style lands.
+ */
+const PRE_POSITION_STYLE: React.CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: 'max-content',
+  visibility: 'hidden',
+  zIndex: 1070,
+}
+
+/** useLayoutEffect that is SSR-safe (falls back to useEffect on the server). */
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect
 
 /**
  * Find the nearest scrollable ancestor (for capturing scroll events inside
@@ -298,7 +318,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   const [yearPage, setYearPage] = React.useState(() =>
     Math.floor((resolvedValue ? resolvedValue.getFullYear() : new Date().getFullYear()) / YEARS_PER_PAGE) * YEARS_PER_PAGE
   )
-  const [popoverStyle, setPopoverStyle] = React.useState<React.CSSProperties>({})
+  const [popoverStyle, setPopoverStyle] = React.useState<React.CSSProperties>(PRE_POSITION_STYLE)
 
   const inputRef = React.useRef<HTMLInputElement>(null)
   const popoverRef = React.useRef<HTMLDivElement>(null)
@@ -332,8 +352,13 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   }, [resolvedValue])
 
   /* ---- reposition popover on open / scroll / resize ---- */
-  React.useEffect(() => {
-    if (!isOpen) return
+  useIsomorphicLayoutEffect(() => {
+    if (!isOpen) {
+      /* Reset so the next open starts hidden until measured — reusing the last
+         position would flash the popover at the previous location */
+      setPopoverStyle(PRE_POSITION_STYLE)
+      return
+    }
 
     /* Measure actual popover size so we position with no wasted space */
     const getHeight = (): number => {
@@ -352,19 +377,26 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
     const scrollParent = getScrollParent(inputRef.current)
 
     const update = () => {
-      /* Force a paint frame so the popover has its real size */
-      requestAnimationFrame(() => {
-        setPopoverStyle(calcPopoverStyle(inputRef.current, getHeight(), getWidth()))
-      })
+      setPopoverStyle(calcPopoverStyle(inputRef.current, getHeight(), getWidth()))
     }
+    /* Position synchronously before paint — the popover is already mounted
+       (hidden, content-sized via PRE_POSITION_STYLE) so measurements are real */
     update()
 
+    /* Throttle scroll/resize repositioning to animation frames */
+    let raf = 0
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+
     /* Listen on the nearest scrollable ancestor (e.g. modal body) AND the window */
-    scrollParent.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
+    scrollParent.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
     return () => {
-      scrollParent.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
+      cancelAnimationFrame(raf)
+      scrollParent.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
     }
   }, [isOpen, mode, showYearPicker])
 
@@ -451,8 +483,12 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   }
 
   const today = new Date()
-  const minDt = minDate ? new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()) : null
-  const maxDt = maxDate ? new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate()) : null
+  /* min/max accept the same flexible inputs as `value` (Date, string, timestamp) —
+     a formatted string from another DatePicker's onChange is a common source */
+  const resolvedMin = resolveValue(minDate)
+  const resolvedMax = resolveValue(maxDate)
+  const minDt = resolvedMin ? new Date(resolvedMin.getFullYear(), resolvedMin.getMonth(), resolvedMin.getDate()) : null
+  const maxDt = resolvedMax ? new Date(resolvedMax.getFullYear(), resolvedMax.getMonth(), resolvedMax.getDate()) : null
 
   /* ---- time change handlers ---- */
   const handleHourChange = (h: number) => {

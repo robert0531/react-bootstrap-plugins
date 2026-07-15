@@ -8,6 +8,7 @@ export default defineConfig({
     Label: 'src/components/Label.tsx',
     TableLoading: 'src/components/TableLoading.tsx',
     AutoTextarea: 'src/components/AutoTextarea.tsx',
+    NavPills: 'src/components/NavPills.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
