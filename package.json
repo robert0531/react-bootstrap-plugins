@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.3.0",
-  "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, and more. Zero runtime dependencies beyond React.",
+  "version": "2.4.0",
+  "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
     "name": "Tumwesigye Robert",
@@ -82,6 +82,16 @@
         "default": "./dist/AutoDisplay.cjs"
       }
     },
+    "./InputCurrency": {
+      "import": {
+        "types": "./dist/InputCurrency.d.ts",
+        "default": "./dist/InputCurrency.js"
+      },
+      "require": {
+        "types": "./dist/InputCurrency.d.ts",
+        "default": "./dist/InputCurrency.cjs"
+      }
+    },
     "./NavPills": {
       "import": {
         "types": "./dist/NavPills.d.ts",
@@ -141,7 +151,12 @@
     "react-bootstrap",
     "form-controls",
     "tree-shakeable",
-    "zero-dependencies"
+    "zero-dependencies",
+    "input-currency",
+    "currency-input",
+    "currency-formatter",
+    "number-input",
+    "financial-input"
   ],
   "repository": {
     "type": "git",

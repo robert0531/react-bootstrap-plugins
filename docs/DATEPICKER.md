@@ -49,6 +49,7 @@ function MyForm() {
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `mode` | `'date'` \| `'time'` \| `'datetime'` | `'date'` | Picker mode |
+| `calendar` | `boolean` | `false` | When `true`, renders the calendar inline without an input field or time picker. Ideal for embedding a date picker directly in a form or dashboard. |
 | `value` | `Date` \| `string` \| `null` | — | Currently selected value |
 | `selected` | `Date` \| `null` | — | Alias for `value` |
 | `onChange` | `(e) => void` | — | Synthetic event; `e.target.value` is formatted string, `e.target.name` is the input name |
@@ -106,6 +107,24 @@ function MyForm() {
 />
 // e.target.value → "29/06/2026 02:30 PM"
 ```
+
+### Inline Calendar mode
+
+When `calendar` is `true`, the picker renders as an inline calendar card — no input field, no popover, no time picker. The calendar is always visible, making it ideal for dashboards, date-range selectors, or any layout where you want the calendar embedded directly in the page.
+
+```jsx
+<DatePicker
+  calendar
+  name="eventDate"
+  value={eventDate}
+  onChange={(e) => setEventDate(e.target.value)}
+  minDate={new Date()}
+/>
+// e.target.value → "2026-07-22"
+// Renders as an inline card with the full calendar grid
+```
+
+The component applies the `datepicker-calendar-inline` CSS class alongside `card`, `border`, and `shadow-sm` for the wrapper. Any `className` you pass is merged onto the wrapper div.
 
 ### Linked pickers (start date bounds end date)
 

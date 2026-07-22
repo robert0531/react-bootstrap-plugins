@@ -16,6 +16,7 @@
 | **TableLoading** | [TABLELOADING.md](./docs/TABLELOADING.md) | Bootstrap 5 placeholder loading skeleton for table `<tbody>` |
 | **AutoTextarea** | [AUTOTEXTAREA.md](./docs/AUTOTEXTAREA.md) | Auto-resizing textarea — grows with content up to `maxRows`/`maxHeight`, then scrolls |
 | **NavPills** | [NAVPILLS.md](./docs/NAVPILLS.md) | Horizontal nav-pills tab strip with icons, dismissible pills, and "New" badges |
+| **InputCurrency** | [INPUTCURRENCY.md](./docs/INPUTCURRENCY.md) | Controlled currency input — numbers in/out, locale-formatted display, focus-based editing |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
@@ -112,6 +113,7 @@ import Label from 'react-bootstrap-plugins/Label'
 import TableLoading from 'react-bootstrap-plugins/TableLoading'
 import AutoTextarea from 'react-bootstrap-plugins/AutoTextarea'
 import NavPills from 'react-bootstrap-plugins/NavPills'
+import InputCurrency from 'react-bootstrap-plugins/InputCurrency'
 
 // Single component — named import
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
@@ -120,9 +122,10 @@ import { Label } from 'react-bootstrap-plugins/Label'
 import { TableLoading } from 'react-bootstrap-plugins/TableLoading'
 import { AutoTextarea } from 'react-bootstrap-plugins/AutoTextarea'
 import { NavPills } from 'react-bootstrap-plugins/NavPills'
+import { InputCurrency } from 'react-bootstrap-plugins/InputCurrency'
 
 // Multiple named — barrel, tree-shaken
-import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills } from 'react-bootstrap-plugins'
+import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, InputCurrency } from 'react-bootstrap-plugins'
 
 // CSS (required for DatePicker and NavPills badges)
 import 'react-bootstrap-plugins/css/plugins.css'
@@ -168,7 +171,8 @@ function App() {
 | `TableLoading` | ~0.2 KB |
 | `AutoTextarea` | ~0.4 KB |
 | `NavPills` | ~0.5 KB |
-| All six (barrel) | ~7.6 KB |
+| `InputCurrency` | ~0.6 KB |
+| All seven (barrel) | ~8.2 KB |
 
 Measured with ESM, tree-shaken, minified, gzipped. Your actual size depends on your bundler configuration.
 
@@ -225,6 +229,7 @@ src/
 │   ├── TableLoading.jsx  Table placeholder skeleton
 │   ├── AutoTextarea.jsx  Auto-resizing textarea
 │   ├── NavPills.jsx      Horizontal pill tab strip
+│   ├── InputCurrency.tsx  Controlled currency input
 │   └── *.d.ts            TypeScript declarations
 └── css/
     └── plugins.css
@@ -234,7 +239,7 @@ src/
 
 ## License
 
-MIT © [Tumwesigye Robert](https://allios.app)
+MIT © [Tumwesigye Robert](https://github.com/robert0531)
 
 ---
 

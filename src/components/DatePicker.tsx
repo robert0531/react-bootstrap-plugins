@@ -20,6 +20,8 @@ export interface DatePickerChangeEvent {
 export interface DatePickerProps {
   /** Picker mode (default 'date') */
   mode?: 'date' | 'time' | 'datetime'
+  /** When true, renders the calendar inline without an input field or time picker */
+  calendar?: boolean
   /** Currently selected Date (alias for value) */
   selected?: Date | null
   /** Currently selected Date, ISO string, "hh:mm AA" time string, "YYYY-MM-DD hh:mm AA" datetime string, or timestamp */
@@ -238,6 +240,7 @@ const calcPopoverStyle = (inputEl: HTMLElement | null, popoverHeight: number, po
 const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   className,
   mode = 'date',
+  calendar = false,
   selected,
   value,
   onChange,
@@ -298,8 +301,8 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
       value instanceof Date ? value.getTime() : value,
     ],
   )
-  const showCalendar = mode === 'date' || mode === 'datetime'
-  const showTime = mode === 'time' || mode === 'datetime'
+  const showCalendar = calendar || mode === 'date' || mode === 'datetime'
+  const showTime = !calendar && (mode === 'time' || mode === 'datetime')
 
   /* ---- internal state ---- */
   const [isOpen, setIsOpen] = React.useState(false)
@@ -447,7 +450,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
 
   const commitDateOnly = (date: Date): void => {
     setTempDate(date)
-    if (mode === 'date') {
+    if (mode === 'date' || calendar) {
       commit(date)
     } else if (mode === 'datetime') {
       // Build full datetime (date + current time selection) and fire
@@ -559,15 +562,8 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   const placeholder = placeholderText
     ?? (mode === 'time' ? 'Select time' : mode === 'datetime' ? 'Select date & time' : 'Select date')
 
-  const popover = (
-    <div
-      ref={popoverRef}
-      className={cn(
-        'datepicker-popover card border shadow-sm',
-        mode === 'datetime' && 'datepicker-popover--wide'
-      )}
-      style={popoverStyle}
-    >
+  const pickerBody = (
+    <>
       {/* ============== YEAR PICKER ============== */}
       {showYearPicker && showCalendar && (
         <div className="datepicker-year-picker p-3">
@@ -726,8 +722,30 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
         </div>
         </>
       )}
+    </>
+  )
+
+  const popover = (
+    <div
+      ref={popoverRef}
+      className={cn(
+        'datepicker-popover card border shadow-sm',
+        mode === 'datetime' && 'datepicker-popover--wide'
+      )}
+      style={popoverStyle}
+    >
+      {pickerBody}
     </div>
   )
+
+  /* ---- inline calendar mode (no input, no popover) ---- */
+  if (calendar) {
+    return (
+      <div className={cn('datepicker-calendar-inline card border shadow-sm', className)}>
+        {pickerBody}
+      </div>
+    )
+  }
 
   return (
     <div className="datepicker-wrapper position-relative d-inline-block w-100" style={{ minWidth: 0 }}>
