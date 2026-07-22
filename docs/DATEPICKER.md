@@ -2,6 +2,8 @@
 
 > A fully-featured date, time, and datetime picker with Bootstrap 5 styling. Popover is rendered via React Portal — no z-index stacking issues with modals or sidebars.
 
+![DatePicker in a Bootstrap modal — portal rendering ensures no z-index clipping](../sample/datepickerinmodal.png)
+
 ---
 
 ## Import
@@ -72,6 +74,8 @@ function MyForm() {
 
 ### Date mode (default)
 
+![Date picker calendar popover](../sample/datepickercalendar.png)
+
 ```jsx
 <DatePicker
   name="dob"
@@ -97,6 +101,8 @@ function MyForm() {
 ```
 
 ### Datetime mode
+
+![Date and time picker — combined calendar + time dropdown](../sample/dateandtimepicker.png)
 
 ```jsx
 <DatePicker
