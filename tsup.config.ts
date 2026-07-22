@@ -10,6 +10,7 @@ export default defineConfig({
     AutoTextarea: 'src/components/AutoTextarea.tsx',
     NavPills: 'src/components/NavPills.tsx',
     AutoDisplay: 'src/components/AutoDisplay.tsx',
+    InputCurrency: 'src/components/InputCurrency.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],

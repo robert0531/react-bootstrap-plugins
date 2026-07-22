@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -127,7 +127,7 @@
     "prepublishOnly": "pnpm run build",
     "lint": "echo 'Lint passed'",
     "test": "echo 'Tests passed'",
-    "push-npm": "npm publish --no-git-checks"
+    "push": "npm publish --no-git-checks"
   },
   "keywords": [
     "react",
