@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.4.1",
+  "version": "2.5.1",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -102,6 +102,16 @@
         "default": "./dist/NavPills.cjs"
       }
     },
+    "./ListGroup": {
+      "import": {
+        "types": "./dist/ListGroup.d.ts",
+        "default": "./dist/ListGroup.js"
+      },
+      "require": {
+        "types": "./dist/ListGroup.d.ts",
+        "default": "./dist/ListGroup.cjs"
+      }
+    },
     "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
@@ -147,6 +157,8 @@
     "autosize",
     "nav-pills",
     "tabs",
+    "list-group",
+    "listgroup",
     "ui-components",
     "react-bootstrap",
     "form-controls",

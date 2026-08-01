@@ -42,9 +42,7 @@ export interface DatePickerProps {
   minDate?: Date | string | number | null
   /** Latest selectable date — Date, ISO/"YYYY-MM-DD" string, or timestamp (e.g. another DatePicker's onChange value) */
   maxDate?: Date | string | number | null
-  /** Minute step in the time list (default 5) */
-  timeIntervals?: number
-  /** Timezone identifier (default 'Kampala') */
+  /** Timezone identifier (default 'Africa/Kampala') */
   timezone?: string
   /** Additional CSS classes on the input */
   className?: string
@@ -78,6 +76,17 @@ const isSameDay = (a: Date | null, b: Date | null): boolean =>
   a.getFullYear() === b.getFullYear() &&
   a.getMonth() === b.getMonth() &&
   a.getDate() === b.getDate()
+
+/**
+ * Returns a Date object (midnight, local time) representing the current date
+ * in the specified timezone. This ensures the calendar's "today" highlight
+ * and initial view reflect the target timezone rather than the browser's.
+ */
+const getTzToday = (tz: string): Date => {
+  const [dateStr] = new Date().toLocaleString('en-US', { timeZone: tz, hour12: false }).split(', ')
+  const [month, day, year] = dateStr.split('/').map(Number)
+  return new Date(year, month - 1, day)
+}
 
 const isDateInRange = (date: Date, min: Date | null, max: Date | null): boolean => {
   if (min && date < new Date(min.getFullYear(), min.getMonth(), min.getDate())) return false
@@ -251,8 +260,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   disabled = false,
   minDate,
   maxDate,
-  timeIntervals = 5,
-  timezone = 'Kampala',
+  timezone = 'Africa/Kampala',
   id,
   name,
   ...props
@@ -307,9 +315,9 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
   /* ---- internal state ---- */
   const [isOpen, setIsOpen] = React.useState(false)
   const [viewYear, setViewYear] = React.useState(() =>
-    resolvedValue ? resolvedValue.getFullYear() : new Date().getFullYear())
+    resolvedValue ? resolvedValue.getFullYear() : getTzToday(timezone).getFullYear())
   const [viewMonth, setViewMonth] = React.useState(() =>
-    resolvedValue ? resolvedValue.getMonth() : new Date().getMonth())
+    resolvedValue ? resolvedValue.getMonth() : getTzToday(timezone).getMonth())
   const [tempDate, setTempDate] = React.useState<Date | null>(resolvedValue)
   const [tempHours, setTempHours] = React.useState(() =>
     resolvedValue ? (resolvedValue.getHours() % 12 || 12) : 12)
@@ -319,7 +327,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
     resolvedValue ? (resolvedValue.getHours() >= 12 ? 'PM' : 'AM') : 'AM')
   const [showYearPicker, setShowYearPicker] = React.useState(false)
   const [yearPage, setYearPage] = React.useState(() =>
-    Math.floor((resolvedValue ? resolvedValue.getFullYear() : new Date().getFullYear()) / YEARS_PER_PAGE) * YEARS_PER_PAGE
+    Math.floor((resolvedValue ? resolvedValue.getFullYear() : getTzToday(timezone).getFullYear()) / YEARS_PER_PAGE) * YEARS_PER_PAGE
   )
   const [popoverStyle, setPopoverStyle] = React.useState<React.CSSProperties>(PRE_POSITION_STYLE)
 
@@ -485,7 +493,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
     fireChange(showTime ? buildDate(newDate, tempHours, tempMins, tempAmPm) : newDate)
   }
 
-  const today = new Date()
+  const today = getTzToday(timezone)
   /* min/max accept the same flexible inputs as `value` (Date, string, timestamp) —
      a formatted string from another DatePicker's onChange is a common source */
   const resolvedMin = resolveValue(minDate)
@@ -574,7 +582,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
           </div>
           <div className="datepicker-year-grid">
             {years.map((y) => {
-              const isCurrentYear = y === new Date().getFullYear()
+              const isCurrentYear = y === getTzToday(timezone).getFullYear()
               const isSelected = tempDate && y === tempDate.getFullYear()
               return (
                 <button

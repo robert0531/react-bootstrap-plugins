@@ -17,6 +17,7 @@
 | **AutoTextarea** | [AUTOTEXTAREA.md](./docs/AUTOTEXTAREA.md) | Auto-resizing textarea — grows with content up to `maxRows`/`maxHeight`, then scrolls |
 | **NavPills** | [NAVPILLS.md](./docs/NAVPILLS.md) | Horizontal nav-pills tab strip with icons, dismissible pills, and "New" badges |
 | **InputCurrency** | [INPUTCURRENCY.md](./docs/INPUTCURRENCY.md) | Controlled currency input — numbers in/out, locale-formatted display, focus-based editing |
+| **ListGroup** | [LISTGROUP.md](./docs/LISTGROUP.md) | Bootstrap list-group with active-state highlighting, icons, badges, and descriptions |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
@@ -114,6 +115,7 @@ import TableLoading from 'react-bootstrap-plugins/TableLoading'
 import AutoTextarea from 'react-bootstrap-plugins/AutoTextarea'
 import NavPills from 'react-bootstrap-plugins/NavPills'
 import InputCurrency from 'react-bootstrap-plugins/InputCurrency'
+import ListGroup from 'react-bootstrap-plugins/ListGroup'
 
 // Single component — named import
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
@@ -123,9 +125,10 @@ import { TableLoading } from 'react-bootstrap-plugins/TableLoading'
 import { AutoTextarea } from 'react-bootstrap-plugins/AutoTextarea'
 import { NavPills } from 'react-bootstrap-plugins/NavPills'
 import { InputCurrency } from 'react-bootstrap-plugins/InputCurrency'
+import { ListGroup } from 'react-bootstrap-plugins/ListGroup'
 
 // Multiple named — barrel, tree-shaken
-import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, InputCurrency } from 'react-bootstrap-plugins'
+import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, InputCurrency, ListGroup } from 'react-bootstrap-plugins'
 
 // CSS (required for DatePicker and NavPills badges)
 import 'react-bootstrap-plugins/css/plugins.css'
@@ -172,7 +175,8 @@ function App() {
 | `AutoTextarea` | ~0.4 KB |
 | `NavPills` | ~0.5 KB |
 | `InputCurrency` | ~0.6 KB |
-| All seven (barrel) | ~8.2 KB |
+| `ListGroup` | ~0.6 KB |
+| All eight (barrel) | ~8.8 KB |
 
 Measured with ESM, tree-shaken, minified, gzipped. Your actual size depends on your bundler configuration.
 
@@ -230,6 +234,7 @@ src/
 │   ├── AutoTextarea.jsx  Auto-resizing textarea
 │   ├── NavPills.jsx      Horizontal pill tab strip
 │   ├── InputCurrency.tsx  Controlled currency input
+│   ├── ListGroup.tsx      List-group with icons, badges, descriptions
 │   └── *.d.ts            TypeScript declarations
 └── css/
     └── plugins.css

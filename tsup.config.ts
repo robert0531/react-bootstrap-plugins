@@ -11,6 +11,7 @@ export default defineConfig({
     NavPills: 'src/components/NavPills.tsx',
     AutoDisplay: 'src/components/AutoDisplay.tsx',
     InputCurrency: 'src/components/InputCurrency.tsx',
+    ListGroup: 'src/components/ListGroup.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],

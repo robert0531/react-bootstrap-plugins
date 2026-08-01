@@ -12,8 +12,8 @@
 .input-group > .searchselect-wrapper {
   position: relative;
   flex: 1 1 auto;
-  width: 1%;
-  min-width: 0;
+  width: 1% !important;
+  min-width: 0 !important;
 }
 
 /* Match border-radius treatment that Bootstrap applies to .form-control */
