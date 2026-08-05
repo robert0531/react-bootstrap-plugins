@@ -37,6 +37,8 @@ export interface NavPillsProps {
   contain?: boolean
   /** Additional CSS classes (on the wrapper when `contain`, else on the nav) */
   className?: string
+
+  style?: React.CSSProperties
 }
 
 /* ------------------------------------------------------------------ */
@@ -66,6 +68,7 @@ const NavPills = React.forwardRef<HTMLElement, NavPillsProps>(({
   clear,
   onClick,
   className,
+  style
 }, ref) => {
   const items = (pills ?? []).map((r) => (
     <button
@@ -94,7 +97,7 @@ const NavPills = React.forwardRef<HTMLElement, NavPillsProps>(({
 
   if (contain) {
     return (
-      <div className={cn('navpills-bar px-2 bg-light rounded-0 mb-0', className)}>
+      <div className={cn('navpills-bar px-2 bg-light rounded-0 mb-0', className)} style={style}>
         <nav ref={ref} className="container nav nav-pills overflow-x-auto flex-nowrap">
           {items}
         </nav>
@@ -103,7 +106,7 @@ const NavPills = React.forwardRef<HTMLElement, NavPillsProps>(({
   }
 
   return (
-    <nav ref={ref} className={cn('nav nav-pills overflow-x-auto flex-nowrap', className)}>
+    <nav ref={ref} className={cn('nav nav-pills overflow-x-auto flex-nowrap', className)} style={style}>
       {items}
     </nav>
   )
