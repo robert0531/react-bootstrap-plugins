@@ -12,6 +12,7 @@ export default defineConfig({
     AutoDisplay: 'src/components/AutoDisplay.tsx',
     InputCurrency: 'src/components/InputCurrency.tsx',
     ListGroup: 'src/components/ListGroup.tsx',
+    FormRow: 'src/components/FormRow.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],

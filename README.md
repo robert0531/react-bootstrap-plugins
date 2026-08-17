@@ -18,6 +18,7 @@
 | **NavPills** | [NAVPILLS.md](./docs/NAVPILLS.md) | Horizontal nav-pills tab strip with icons, dismissible pills, and "New" badges |
 | **InputCurrency** | [INPUTCURRENCY.md](./docs/INPUTCURRENCY.md) | Controlled currency input — numbers in/out, locale-formatted display, focus-based editing |
 | **ListGroup** | [LISTGROUP.md](./docs/LISTGROUP.md) | Bootstrap list-group with active-state highlighting, icons, badges, and descriptions |
+| **FormRow** | [FORMROW.md](./docs/FORMROW.md) | Form row wrapper — label, control, helper text, and required indicator |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
@@ -116,6 +117,7 @@ import AutoTextarea from 'react-bootstrap-plugins/AutoTextarea'
 import NavPills from 'react-bootstrap-plugins/NavPills'
 import InputCurrency from 'react-bootstrap-plugins/InputCurrency'
 import ListGroup from 'react-bootstrap-plugins/ListGroup'
+import FormRow from 'react-bootstrap-plugins/FormRow'
 
 // Single component — named import
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
@@ -126,9 +128,10 @@ import { AutoTextarea } from 'react-bootstrap-plugins/AutoTextarea'
 import { NavPills } from 'react-bootstrap-plugins/NavPills'
 import { InputCurrency } from 'react-bootstrap-plugins/InputCurrency'
 import { ListGroup } from 'react-bootstrap-plugins/ListGroup'
+import { FormRow } from 'react-bootstrap-plugins/FormRow'
 
 // Multiple named — barrel, tree-shaken
-import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, InputCurrency, ListGroup } from 'react-bootstrap-plugins'
+import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, InputCurrency, ListGroup, FormRow } from 'react-bootstrap-plugins'
 
 // CSS (required for DatePicker and NavPills badges)
 import 'react-bootstrap-plugins/css/plugins.css'
@@ -176,7 +179,8 @@ function App() {
 | `NavPills` | ~0.5 KB |
 | `InputCurrency` | ~0.6 KB |
 | `ListGroup` | ~0.6 KB |
-| All eight (barrel) | ~8.8 KB |
+| `FormRow` | ~0.3 KB |
+| All nine (barrel) | ~9.1 KB |
 
 Measured with ESM, tree-shaken, minified, gzipped. Your actual size depends on your bundler configuration.
 
@@ -235,6 +239,7 @@ src/
 │   ├── NavPills.jsx      Horizontal pill tab strip
 │   ├── InputCurrency.tsx  Controlled currency input
 │   ├── ListGroup.tsx      List-group with icons, badges, descriptions
+│   ├── FormRow.tsx        Form row wrapper — label, control, hint
 │   └── *.d.ts            TypeScript declarations
 └── css/
     └── plugins.css

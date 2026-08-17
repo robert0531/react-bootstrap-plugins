@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -112,6 +112,16 @@
         "default": "./dist/ListGroup.cjs"
       }
     },
+    "./FormRow": {
+      "import": {
+        "types": "./dist/FormRow.d.ts",
+        "default": "./dist/FormRow.js"
+      },
+      "require": {
+        "types": "./dist/FormRow.d.ts",
+        "default": "./dist/FormRow.cjs"
+      }
+    },
     "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
@@ -137,7 +147,7 @@
     "prepublishOnly": "pnpm run build",
     "lint": "echo 'Lint passed'",
     "test": "echo 'Tests passed'",
-    "push": "npm publish --no-git-checks"
+    "push": "pnpm publish --no-git-checks"
   },
   "keywords": [
     "react",
@@ -162,6 +172,8 @@
     "ui-components",
     "react-bootstrap",
     "form-controls",
+    "form-row",
+    "form-group",
     "tree-shakeable",
     "zero-dependencies",
     "input-currency",
