@@ -30,6 +30,9 @@ yarn-error.log*
 coverage/
 .nyc_output/
 
+# Brainstorming artifacts
+.superpowers/
+
 # Temp
 tmp/
 temp/
