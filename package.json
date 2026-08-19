@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -122,6 +122,16 @@
         "default": "./dist/FormRow.cjs"
       }
     },
+    "./ConfirmDialog": {
+      "import": {
+        "types": "./dist/ConfirmDialog.d.ts",
+        "default": "./dist/ConfirmDialog.js"
+      },
+      "require": {
+        "types": "./dist/ConfirmDialog.d.ts",
+        "default": "./dist/ConfirmDialog.cjs"
+      }
+    },
     "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
   },
@@ -169,6 +179,9 @@
     "tabs",
     "list-group",
     "listgroup",
+    "confirm-dialog",
+    "confirmation",
+    "modal",
     "ui-components",
     "react-bootstrap",
     "form-controls",

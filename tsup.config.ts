@@ -13,6 +13,7 @@ export default defineConfig({
     InputCurrency: 'src/components/InputCurrency.tsx',
     ListGroup: 'src/components/ListGroup.tsx',
     FormRow: 'src/components/FormRow.tsx',
+    ConfirmDialog: 'src/components/ConfirmDialog.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
