@@ -19,6 +19,7 @@
 | **InputCurrency** | [INPUTCURRENCY.md](./docs/INPUTCURRENCY.md) | Controlled currency input — numbers in/out, locale-formatted display, focus-based editing |
 | **ListGroup** | [LISTGROUP.md](./docs/LISTGROUP.md) | Bootstrap list-group with active-state highlighting, icons, badges, and descriptions |
 | **FormRow** | [FORMROW.md](./docs/FORMROW.md) | Form row wrapper — label, control, helper text, and required indicator |
+| **ConfirmDialog** | [CONFIRMDIALOG.md](./docs/CONFIRMDIALOG.md) | Bootstrap 5 confirmation dialog with async loading state |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
