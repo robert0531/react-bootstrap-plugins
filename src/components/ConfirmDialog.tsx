@@ -65,10 +65,19 @@ const ConfirmDialog = React.forwardRef<HTMLDivElement, ConfirmDialogProps>(({
   const messageId = React.useId()
   const dialogRef = React.useRef<HTMLDivElement>(null)
   const confirmRef = React.useRef<HTMLButtonElement>(null)
+  const confirmRunRef = React.useRef(0)
 
   /* Focus the primary action when the dialog opens */
   React.useEffect(() => {
     if (show) confirmRef.current?.focus()
+  }, [show])
+
+  /* Reset pending when closed — invalidates any in-flight confirm */
+  React.useEffect(() => {
+    if (!show) {
+      confirmRunRef.current++
+      setIsPending(false)
+    }
   }, [show])
 
   /* Body scroll lock while shown (compensate scrollbar disappearance) */
@@ -118,11 +127,12 @@ const ConfirmDialog = React.forwardRef<HTMLDivElement, ConfirmDialogProps>(({
 
   const handleConfirmClick = async () => {
     if (isPending) return
+    const runId = ++confirmRunRef.current
     setIsPending(true)
     try {
       await onConfirm()
     } finally {
-      setIsPending(false)
+      if (confirmRunRef.current === runId) setIsPending(false)
     }
   }
 
