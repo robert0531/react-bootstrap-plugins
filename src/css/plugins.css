@@ -363,3 +363,54 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.6);
 }
+
+/* ==========================================================================
+   ConfirmDialog — "Refined Minimal" premium confirmation dialog
+   Bootstrap 5 modal markup portaled to document.body. Theme-aware via
+   --bs-* variables (dark mode works automatically).
+   ========================================================================== */
+
+.confirmdialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.confirmdialog .modal-content {
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.confirmdialog-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 18px 12px;
+}
+
+.confirmdialog-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.confirmdialog-header .modal-title {
+  font-weight: 600;
+}
+
+.confirmdialog-body {
+  padding: 4px 18px 16px 34px;
+  color: var(--bs-secondary-color, #6c757d);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.confirmdialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 18px 16px;
+}
