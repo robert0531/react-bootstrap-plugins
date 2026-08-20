@@ -100,15 +100,8 @@ This replaces the `clsx` + `tailwind-merge` pattern used in the main app — the
      NewComponent: 'src/components/NewComponent.jsx',
    }
    ```
-4. Add to `package.json` exports map:
-   ```json
-   "./NewComponent": {
-     "import": { "types": "./dist/NewComponent.d.mts", "default": "./dist/NewComponent.js" },
-     "require": { "types": "./dist/NewComponent.d.cts", "default": "./dist/NewComponent.cjs" }
-   }
-   ```
-5. Add to barrel export in `src/index.js`
-6. Document in README.md
+4. Add to barrel export in `src/index.js`
+5. Document in README.md
 
 ## Publishing Checklist
 

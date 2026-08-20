@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
@@ -22,115 +22,10 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./DatePicker": {
-      "import": {
-        "types": "./dist/DatePicker.d.ts",
-        "default": "./dist/DatePicker.js"
-      },
-      "require": {
-        "types": "./dist/DatePicker.d.ts",
-        "default": "./dist/DatePicker.cjs"
-      }
-    },
-    "./SearchSelect": {
-      "import": {
-        "types": "./dist/SearchSelect.d.ts",
-        "default": "./dist/SearchSelect.js"
-      },
-      "require": {
-        "types": "./dist/SearchSelect.d.ts",
-        "default": "./dist/SearchSelect.cjs"
-      }
-    },
-    "./Label": {
-      "import": {
-        "types": "./dist/Label.d.ts",
-        "default": "./dist/Label.js"
-      },
-      "require": {
-        "types": "./dist/Label.d.ts",
-        "default": "./dist/Label.cjs"
-      }
-    },
-    "./TableLoading": {
-      "import": {
-        "types": "./dist/TableLoading.d.ts",
-        "default": "./dist/TableLoading.js"
-      },
-      "require": {
-        "types": "./dist/TableLoading.d.ts",
-        "default": "./dist/TableLoading.cjs"
-      }
-    },
-    "./AutoTextarea": {
-      "import": {
-        "types": "./dist/AutoTextarea.d.ts",
-        "default": "./dist/AutoTextarea.js"
-      },
-      "require": {
-        "types": "./dist/AutoTextarea.d.ts",
-        "default": "./dist/AutoTextarea.cjs"
-      }
-    },
-    "./AutoDisplay": {
-      "import": {
-        "types": "./dist/AutoDisplay.d.ts",
-        "default": "./dist/AutoDisplay.js"
-      },
-      "require": {
-        "types": "./dist/AutoDisplay.d.ts",
-        "default": "./dist/AutoDisplay.cjs"
-      }
-    },
-    "./InputCurrency": {
-      "import": {
-        "types": "./dist/InputCurrency.d.ts",
-        "default": "./dist/InputCurrency.js"
-      },
-      "require": {
-        "types": "./dist/InputCurrency.d.ts",
-        "default": "./dist/InputCurrency.cjs"
-      }
-    },
-    "./NavPills": {
-      "import": {
-        "types": "./dist/NavPills.d.ts",
-        "default": "./dist/NavPills.js"
-      },
-      "require": {
-        "types": "./dist/NavPills.d.ts",
-        "default": "./dist/NavPills.cjs"
-      }
-    },
-    "./ListGroup": {
-      "import": {
-        "types": "./dist/ListGroup.d.ts",
-        "default": "./dist/ListGroup.js"
-      },
-      "require": {
-        "types": "./dist/ListGroup.d.ts",
-        "default": "./dist/ListGroup.cjs"
-      }
-    },
-    "./FormRow": {
-      "import": {
-        "types": "./dist/FormRow.d.ts",
-        "default": "./dist/FormRow.js"
-      },
-      "require": {
-        "types": "./dist/FormRow.d.ts",
-        "default": "./dist/FormRow.cjs"
-      }
-    },
-    "./ConfirmDialog": {
-      "import": {
-        "types": "./dist/ConfirmDialog.d.ts",
-        "default": "./dist/ConfirmDialog.js"
-      },
-      "require": {
-        "types": "./dist/ConfirmDialog.d.ts",
-        "default": "./dist/ConfirmDialog.cjs"
-      }
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js",
+      "require": "./dist/*.cjs"
     },
     "./css/plugins.css": "./dist/css/plugins.css",
     "./css/datepicker.css": "./dist/css/datepicker.css"
