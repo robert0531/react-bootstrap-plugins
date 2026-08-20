@@ -806,4 +806,3 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({
 DatePicker.displayName = 'DatePicker'
 
 export { DatePicker }
-export default DatePicker

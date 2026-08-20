@@ -189,4 +189,3 @@ const ConfirmDialog = React.forwardRef<HTMLDivElement, ConfirmDialogProps>(({
 ConfirmDialog.displayName = 'ConfirmDialog'
 
 export { ConfirmDialog }
-export default ConfirmDialog

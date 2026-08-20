@@ -5,7 +5,7 @@ Zero-dependency Bootstrap 5 confirmation dialog with async loading state. Premiu
 ## Import
 
 ```js
-import ConfirmDialog from 'react-bootstrap-plugins/ConfirmDialog'
+import { ConfirmDialog } from 'react-bootstrap-plugins/ConfirmDialog'
 // or
 import { ConfirmDialog } from 'react-bootstrap-plugins'
 // Required CSS

@@ -112,4 +112,3 @@ const AutoTextarea = React.forwardRef<HTMLTextAreaElement, AutoTextareaProps>(({
 AutoTextarea.displayName = 'AutoTextarea'
 
 export { AutoTextarea }
-export default AutoTextarea

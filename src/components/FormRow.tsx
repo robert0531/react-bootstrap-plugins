@@ -30,4 +30,3 @@ const FormRow = React.forwardRef<HTMLDivElement, FormRowProps>(
 FormRow.displayName = 'FormRow'
 
 export { FormRow }
-export default FormRow

@@ -9,10 +9,7 @@
 ## Import
 
 ```js
-// Default import (recommended for single-component tree-shaking)
-import DatePicker from 'react-bootstrap-plugins/DatePicker'
-
-// Named import from individual entry point
+// Named import from individual entry point (recommended for single-component tree-shaking)
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
 
 // Barrel import

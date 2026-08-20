@@ -156,4 +156,3 @@ const ListGroup = React.forwardRef<HTMLDivElement, ListGroupProps>(({
 ListGroup.displayName = 'ListGroup'
 
 export { ListGroup }
-export default ListGroup

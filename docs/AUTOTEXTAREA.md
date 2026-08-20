@@ -7,10 +7,7 @@
 ## Import
 
 ```js
-// Default import (recommended for single-component tree-shaking)
-import AutoTextarea from 'react-bootstrap-plugins/AutoTextarea'
-
-// Named import from individual entry point
+// Named import from individual entry point (recommended for single-component tree-shaking)
 import { AutoTextarea } from 'react-bootstrap-plugins/AutoTextarea'
 
 // Barrel import

@@ -223,4 +223,3 @@ const InputCurrency = React.forwardRef<HTMLInputElement, InputCurrencyProps>(
 InputCurrency.displayName = 'InputCurrency'
 
 export { InputCurrency }
-export default InputCurrency

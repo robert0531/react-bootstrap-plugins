@@ -22,6 +22,8 @@ export interface NavPill {
   clear?: boolean
   /** Show a "New" badge on this pill */
   new?: boolean
+  /** Disable this pill */
+  disabled?: boolean
 }
 
 export interface NavPillsProps {
@@ -74,6 +76,7 @@ const NavPills = React.forwardRef<HTMLElement, NavPillsProps>(({
     <button
       key={String(r.key)}
       type="button"
+      disabled={r.disabled || false}
       className={cn('nav-link text-center align-middle', r.key === active && 'active')}
       onClick={() => onClick?.(r)}
     >
@@ -115,4 +118,3 @@ const NavPills = React.forwardRef<HTMLElement, NavPillsProps>(({
 NavPills.displayName = 'NavPills'
 
 export { NavPills }
-export default NavPills

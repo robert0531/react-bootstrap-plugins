@@ -7,10 +7,7 @@
 ## Import
 
 ```js
-// Default import (recommended for single-component tree-shaking)
-import TableLoading from 'react-bootstrap-plugins/TableLoading'
-
-// Named import from individual entry point
+// Named import from individual entry point (recommended for single-component tree-shaking)
 import { TableLoading } from 'react-bootstrap-plugins/TableLoading'
 
 // Barrel import

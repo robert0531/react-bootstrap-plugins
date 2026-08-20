@@ -61,8 +61,7 @@ Each subpath export has `import` (ESM) and `require` (CJS) conditions, plus `typ
 
 ### Code Style
 - **Arrow functions only** — `const Component = () => {}`. Never `function Component() {}`.
-- **Named exports** for multi-export components (`DatePicker`, `Label`).
-- **Default export** for `SearchSelect` (kept for backward compat; re-exported as named via barrel).
+- **Named exports only** — every component file ends with `export { Component }`. Never mix `export default` with named exports in the same entry (Rollup CJS builds warn on mixed exports).
 - **kebab-case** file names, **PascalCase** components.
 - **`.jsx` extension** for all files containing JSX.
 
@@ -133,4 +132,4 @@ This replaces the `clsx` + `tailwind-merge` pattern used in the main app — the
 | 3 | Forgetting CSS import | DatePicker renders without CSS — users must `import 'react-bootstrap-plugins/css/plugins.css'` |
 | 4 | Missing export map entry | Each new component needs `package.json` exports updated |
 | 5 | Forgetting `sideEffects` update | CSS files must be listed in `sideEffects` for tree-shaking to work |
-| 6 | Using `export default` for new components | Prefer named exports; re-export in barrel with `{ default as X }` if needed |
+| 6 | Using `export default` for new components | Named exports only — mixing default + named exports triggers Rollup mixed-exports warnings in CJS builds |

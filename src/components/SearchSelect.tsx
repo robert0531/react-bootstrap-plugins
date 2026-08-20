@@ -166,5 +166,4 @@ const SearchSelectInner = <T,>({
 const SearchSelect = React.forwardRef(SearchSelectInner) as SearchSelectComponent
 SearchSelect.displayName = 'SearchSelect'
 
-export default SearchSelect
 export { SearchSelect }

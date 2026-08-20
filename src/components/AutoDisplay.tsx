@@ -27,4 +27,3 @@ const AutoDisplay = React.forwardRef<HTMLDivElement, AutoDisplayProps>(
 AutoDisplay.displayName = 'AutoDisplay'
 
 export { AutoDisplay }
-export default AutoDisplay

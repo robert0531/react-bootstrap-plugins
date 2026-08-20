@@ -109,18 +109,7 @@ If your bundler reports **"Cannot find module"** or fails to resolve the CSS imp
 All patterns are tree-shakeable. Your bundler will only include the code you actually import.
 
 ```js
-// Single component — smallest bundle (default import)
-import DatePicker from 'react-bootstrap-plugins/DatePicker'
-import SearchSelect from 'react-bootstrap-plugins/SearchSelect'
-import Label from 'react-bootstrap-plugins/Label'
-import TableLoading from 'react-bootstrap-plugins/TableLoading'
-import AutoTextarea from 'react-bootstrap-plugins/AutoTextarea'
-import NavPills from 'react-bootstrap-plugins/NavPills'
-import InputCurrency from 'react-bootstrap-plugins/InputCurrency'
-import ListGroup from 'react-bootstrap-plugins/ListGroup'
-import FormRow from 'react-bootstrap-plugins/FormRow'
-
-// Single component — named import
+// Single component — smallest bundle (named import)
 import { DatePicker } from 'react-bootstrap-plugins/DatePicker'
 import { SearchSelect } from 'react-bootstrap-plugins/SearchSelect'
 import { Label } from 'react-bootstrap-plugins/Label'
@@ -138,7 +127,7 @@ import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, 
 import 'react-bootstrap-plugins/css/plugins.css'
 ```
 
-Every component supports **both** default and named imports — use whichever fits your codebase conventions.
+All components use **named exports** — from their individual entry point or the barrel. CJS consumers: `const { DatePicker } = require('react-bootstrap-plugins/DatePicker')`.
 
 ---
 

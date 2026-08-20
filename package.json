@@ -1,11 +1,11 @@
 {
   "name": "react-bootstrap-plugins",
-  "version": "2.7.0",
+  "version": "3.0.0",
   "description": "Production-grade Bootstrap 5 UI plugins for React — DatePicker, SearchSelect, Label, TableLoading, InputCurrency, and more. Zero runtime dependencies beyond React.",
   "license": "MIT",
   "author": {
     "name": "Tumwesigye Robert",
-    "url": "https://allios.app"
+    "url": "https://github.com/robert0531"
   },
   "type": "module",
   "main": "./dist/index.cjs",

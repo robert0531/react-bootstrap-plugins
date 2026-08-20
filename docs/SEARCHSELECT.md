@@ -7,10 +7,7 @@
 ## Import
 
 ```js
-// Default import (recommended for single-component tree-shaking)
-import SearchSelect from 'react-bootstrap-plugins/SearchSelect'
-
-// Named import from individual entry point
+// Named import from individual entry point (recommended for single-component tree-shaking)
 import { SearchSelect } from 'react-bootstrap-plugins/SearchSelect'
 
 // Barrel import

@@ -7,10 +7,7 @@
 ## Import
 
 ```js
-// Default import (recommended for single-component tree-shaking)
-import AutoDisplay from 'react-bootstrap-plugins/AutoDisplay'
-
-// Named import from individual entry point
+// Named import from individual entry point (recommended for single-component tree-shaking)
 import { AutoDisplay } from 'react-bootstrap-plugins/AutoDisplay'
 
 // Barrel import

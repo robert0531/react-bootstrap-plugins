@@ -33,4 +33,3 @@ const TableLoading: React.FC<TableLoadingProps> = ({ rows, row, columns = 4 }) =
 TableLoading.displayName = 'TableLoading'
 
 export { TableLoading }
-export default TableLoading
