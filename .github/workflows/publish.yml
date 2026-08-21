@@ -1,10 +1,8 @@
 name: Publish to npm
 
 on:
-  # release:
-  #   types: [published]
-  push:
-    branches: [main]
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -13,9 +11,9 @@ jobs:
     environment: npm
     permissions:
       contents: read
+      id-token: write
       issues: write
       pull-requests: write
-
 
     steps:
       - name: Checkout
@@ -29,8 +27,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.com'
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -40,7 +38,4 @@ jobs:
         run: pnpm run build
 
       - name: Publish to NPM
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm publish --no-git-checks
