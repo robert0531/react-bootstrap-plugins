@@ -97,7 +97,7 @@
   "bugs": {
     "url": "https://github.com/robert0531/react-bootstrap-plugins/issues"
   },
-  "homepage": "https://allios.app/plugins",
+  "homepage": "https://robert0531.github.io/react-bootstrap-plugins/",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
