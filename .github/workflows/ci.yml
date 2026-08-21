@@ -58,7 +58,4 @@ jobs:
           echo "All build artifacts present."
 
       - name: Check package contents (dry run)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm publish --dry-run --no-git-checks
