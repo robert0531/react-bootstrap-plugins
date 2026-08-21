@@ -1,8 +1,10 @@
 name: Publish to npm
 
 on:
-  release:
-    types: [published]
+  # release:
+  #   types: [published]
+  push:
+    branches: [main]
 
 jobs:
   publish:
@@ -11,10 +13,9 @@ jobs:
     environment: npm
     permissions:
       contents: read
-      id-token: write
       issues: write
       pull-requests: write
-      
+
 
     steps:
       - name: Checkout
@@ -23,7 +24,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 11
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +39,7 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Publish to npm
+      - name: Publish to NPM
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
