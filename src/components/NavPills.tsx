@@ -84,7 +84,7 @@ const NavPills = React.forwardRef<HTMLElement, NavPillsProps>(({
       <span>{r.lbl ?? r.label}</span>
       {r.clear && (
         <span
-          className="badge navpills-badge-clear my-0 float-end text-center align-middle fw-bold fs-6 ms-3"
+          className="badge navpills-badge-clear my-0 float-end text-center align-middle p-1 my-0 fs-6 ms-3"
           role="button"
           aria-label="Dismiss"
           onClick={(e) => { e.stopPropagation(); clear?.(r) }}
