@@ -14,6 +14,7 @@ export default defineConfig({
     ListGroup: 'src/components/ListGroup.tsx',
     FormRow: 'src/components/FormRow.tsx',
     ConfirmDialog: 'src/components/ConfirmDialog.tsx',
+    Stepper: 'src/components/Stepper.tsx',
   },
   format: ['esm', 'cjs'],
   external: ['react', 'react-dom', 'react/jsx-runtime'],

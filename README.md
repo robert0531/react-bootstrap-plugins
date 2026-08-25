@@ -20,6 +20,7 @@
 | **ListGroup** | [LISTGROUP.md](./docs/LISTGROUP.md) | Bootstrap list-group with active-state highlighting, icons, badges, and descriptions |
 | **FormRow** | [FORMROW.md](./docs/FORMROW.md) | Form row wrapper — label, control, helper text, and required indicator |
 | **ConfirmDialog** | [CONFIRMDIALOG.md](./docs/CONFIRMDIALOG.md) | Bootstrap 5 confirmation dialog with async loading state |
+| **Stepper** | [STEPPER.md](./docs/STEPPER.md) | Step indicator with built-in Prev / Next / Action wizard footer |
 
 Each component guide includes full prop tables, usage examples, import patterns, and dark mode behavior.
 
@@ -119,6 +120,8 @@ import { NavPills } from 'react-bootstrap-plugins/NavPills'
 import { InputCurrency } from 'react-bootstrap-plugins/InputCurrency'
 import { ListGroup } from 'react-bootstrap-plugins/ListGroup'
 import { FormRow } from 'react-bootstrap-plugins/FormRow'
+import { ConfirmDialog } from 'react-bootstrap-plugins/ConfirmDialog'
+import { Stepper } from 'react-bootstrap-plugins/Stepper'
 
 // Multiple named — barrel, tree-shaken
 import { DatePicker, SearchSelect, Label, TableLoading, AutoTextarea, NavPills, InputCurrency, ListGroup, FormRow } from 'react-bootstrap-plugins'
@@ -170,7 +173,8 @@ function App() {
 | `InputCurrency` | ~0.6 KB |
 | `ListGroup` | ~0.6 KB |
 | `FormRow` | ~0.3 KB |
-| All nine (barrel) | ~9.1 KB |
+| `Stepper` | ~0.9 KB |
+| All components (barrel) | ~10 KB |
 
 Measured with ESM, tree-shaken, minified, gzipped. Your actual size depends on your bundler configuration.
 
