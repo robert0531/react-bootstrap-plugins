@@ -234,7 +234,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(({
 
   return (
     <>
-      <div ref={ref} className={cn('card-body rounded-0 border-bottom py-4 bg-light', className)} style={style}>
+      <div ref={ref} className={cn('rounded-0 border-bottom py-4 bg-light', className)} style={style}>
         <div className="d-flex justify-content-center align-items-center gap-2">
           {circles}
         </div>
@@ -245,7 +245,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(({
       {hasFooter && (
         <div
           className={cn(
-            'card-footer bg-body-tertiary border-top d-flex',
+            'card-footer bg-body-tertiary border-top d-flex p-2',
             showPrev ? 'justify-content-between' : 'justify-content-end',
             footerClassName
           )}

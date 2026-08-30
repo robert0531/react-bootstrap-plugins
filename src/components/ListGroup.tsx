@@ -60,8 +60,7 @@ const renderBadge = (badge: ListGroupItem['badge'], variant: string, isActive: b
   if (typeof badge === 'string' || typeof badge === 'number') {
     return (
       <span
-        style={{ width: 20, height: 20 }}
-        className={`bg-opacity-25 bg-${v} d-flex justify-content-center align-items-center fw-bolder rounded text-${v}`}
+        className={`bg-opacity-25 bg-${v} p-1 d-flex justify-content-center align-items-center fw-bolder rounded text-${v}`}
       >
         {badge}
       </span>
